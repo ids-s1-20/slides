@@ -1,0 +1,220 @@
+---
+title: "Title"
+subtitle: "`r emo::ji('raised_hands')` Subtitle"
+author: "<br> Dr. Mine Çetinkaya-Rundel"
+date: "[introds.org](https://introds.org/)"
+output:
+  xaringan::moon_reader:
+    css: ["../../xaringan-themer.css", "../../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(emo)
+```
+
+class: middle
+
+# Section title
+
+---
+
+class: inverse
+
+## Inverse `class: inverse`
+
+Use for full page figures
+
+---
+
+## Sample slide
+
+- with
+- tight
+- bullet
+- points
+
+---
+
+## Sample slide
+
+- with
+
+- spaced out
+
+- bullet
+
+- points
+
+---
+
+# Colored text
+
+- .dark-blue[dark-blue] $\leftarrow$ there's also dark-blue
+- .light-blue[light-blue]
+- .green[green]
+- .gray[gray]
+- .pink[pink]
+- .yellow[yellow]
+
+---
+
+## Text alignment
+
+left
+
+.right[right]
+
+.center[center]
+
+---
+
+## Font sizes
+
+- .huge[huge = 400%]
+- .larger[larger = 250%]
+- .large[large = 125%]
+- .midi[midi = 85%] 
+- .small[small = 70%]
+- .xsmall[xsmall = 60%]
+- .tiny[tiny = 50%]
+
+---
+
+## Huge numbers
+
+.pull-left[
+  huge-blue-number  
+  .huge-blue-number[1]
+]
+.pull-right[
+  huge-pink-number    
+  .huge-pink-number[2]
+]
+
+---
+
+## Handwriting
+
+- text
+- .hand[hand]
+- .hand[.pink[hand with]]
+- .hand[.green[other colors]]
+
+---
+
+## Two columns, equal width
+
+.pull-left[
+- text 
+- on
+- left
+]
+.pull-right[
+```{r}
+2 + 1
+plot(cars) #<<
+```
+]
+
+---
+
+## Two columns, wider left
+
+.pull-left-wide[
+- text 
+- on
+- left
+]
+.pull-right-narrow[
+```{r}
+2 + 1
+plot(cars) #<<
+```
+]
+
+---
+
+## Two columns, wider right
+
+.pull-left-narrow[
+- text 
+- on
+- left
+]
+.pull-right-wide[
+```{r}
+2 + 1
+plot(cars) #<<
+```
+]
+
+---
+
+## Fotnote
+
+Some text<sup>+</sup>
+
+.footnote[<sup>+</sup>Footnote]
+
+---
+
+## Custom boxes
+
+.question[
+A question: What is data science?
+]
+
+.your-turn[
+Some instructions: Figure out what data science is...
+]
+
+.tip[
+A tip: Nobody knows what data science is!
+]
+
+---
+
+## ggplot
+
+```{r out.width="55%"}
+library(ggplot2)
+ggplot(mpg, aes(x = hwy, y = cty, color = drv)) +
+  geom_point() #<<
+```
+
+---
+
+## tibble
+
+```{r}
+mpg
+```
+
+---
+
+## kable
+
+Looks terrible, needs css love!
+
+```{r}
+library(knitr)
+kable(mpg)
+```
+
+---
+
+```{r}
+library(DT)
+datatable(mpg)
+```
+
