@@ -160,7 +160,7 @@ plot(cars) #<<
 
 ---
 
-## Fotnote
+## Footnote
 
 Some text<sup>+</sup>
 
