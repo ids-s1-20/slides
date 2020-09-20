@@ -11,7 +11,7 @@ style_solarized_dark(
   link_color = "#A7D5E8",                      # light-blue
   text_bold_color = "#E9AFA3",                 # pink
   code_highlight_color = "#e9d968",            # yellow
-  code_inline_color = "#8A8A8A",               # gray
+  code_inline_color = "#A7A7A7",               # gray
   inverse_background_color = "#ffffff",        # white
   inverse_text_color = "#002b36",              # default bg color
   inverse_header_color = "#A7D5E8",            # light-blue
