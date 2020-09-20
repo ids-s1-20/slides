@@ -50,8 +50,13 @@
   font-family: Raleway;
 }
 
+.title-slide h2 {
+  color: var(--green);
+}
+
 .title-slide h3 {
   color: var(--beige);
+  font-size: 130%;
 }
 
 .title-slide a {
