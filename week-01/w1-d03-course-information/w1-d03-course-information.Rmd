@@ -61,7 +61,6 @@ class: middle
 - Starting in Week 2
 
 - On Zoom - will not be recorded
-  - Link to be posted on Learn + Teams and emailed
 
 - Come and get real time answers to your questions or just say hi!
 
@@ -72,7 +71,6 @@ class: middle
 - On Thursdays 11:10am - 12pm UK time
 
 - On Zoom - will be recorded and posted
-  - Link to be posted on Learn + Teams and emailed
 
 - Live coding session
 
@@ -87,7 +85,6 @@ class: middle
 - On Fridays 10-10:50am, 11:10am-12pm, or 12:10-1pm UK time
 
 - On Zoom - will not be recorded, attendance is expected
-  - Link to be posted on Learn + Teams and emailed
 
 - Work in teams on weekly computing lab exercises during workshop
 
@@ -101,7 +98,7 @@ class: middle
 
 ## Homework assignments
 
-- Due on Tuesdays every other week at 4pm
+- Due on Thursday every other week at 4pm
 
 - Work on them individually
 
@@ -330,10 +327,13 @@ class: middle
 ## Diversity & inclusion
 
 .pull-left-wide[
-- **Intent:** Present materials and activities that are respectful of all axes of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture, etc.
-- Let me know if you have a name that differs from those that appear in your official records and your preferred pronouns.
+- **Intent:** Present materials and activities that are respectful of all axes of diversity.
+
+- Let me know if your preferred name and pronouns.
+
 - Reach out if your performance in the class is being impacted by your experiences outside of class.
-- I am still in the process of learning about diverse perspectives and identities. If something was said in class that made you feel uncomfortable, please let me know.
+
+- I am always in the process of learning about diverse perspectives and identities. If something was said in class that made you feel uncomfortable, please let me know.
 ]
 
 ---
@@ -341,9 +341,9 @@ class: middle
 ## Learning during a pandemic
 
 .pull-left-wide[
-- Life absolutely sucks right now. None of us is really okay. We’re all just pretending.
+- Life sucks right now!
 
-- I’m fully committed to making sure that you learn everything you were hoping to learn from this class! 
+- I want to make sure that you learn everything you were hoping to learn from this class. If this requires flexibility, please don't hesitate to ask.
 
 - You *never* owe me personal information about your health (mental or physical) but you're always welcome to talk to me. If I can’t help, I likely know someone who can.
 
