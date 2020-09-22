@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Meet the toolkit: course operation</title>
+    <title>Meet the toolkit: version control and collaboration</title>
     <meta charset="utf-8" />
     <meta name="author" content="introds.org" />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -14,7 +14,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Meet the toolkit:<br>course operation
+# Meet the toolkit:<br>version control and collaboration
 ## <br><br> Introduction to Data Science
 ### <a href="https://introds.org/">introds.org</a>
 ### <br> Dr. Mine Çetinkaya-Rundel
@@ -37,118 +37,119 @@ layout: true
 
 
 
-class: middle
-
-
----
-
 ## Course toolkit
 
 &lt;br&gt;
 
 .pull-left[
-### Course operation
-- [introds.org](https://www.introds.org/)
+### .gray[Course operation]
+.gray[
+- introds.org
 - Learn
 - Zoom
 - Teams
 - Piazza
 ]
-.pull-right[
-### Doing data science
-- R
-- RStudio
-- R Markdown
-- tidyverse
-- Git
-- GitHub
-]
-
----
-
-## Course toolkit
-
-&lt;br&gt;
-
-.pull-left[
-### .pink[Course operation]
-- [introds.org](https://www.introds.org/)
-- Learn
-- Zoom
-- Teams
-- Piazza
 ]
 .pull-right[
 ### .gray[Doing data science]
-.gray[
-- R
-- RStudio
-- R Markdown
-- tidyverse
-- Git
-- GitHub
+- .gray[Programming:]
+  - .gray[R]
+  - .gray[RStudio]
+  - .gray[tidyverse]
+  - .gray[R Markdown]
+- .pink[Version control and collaboration:]
+  - .pink[Git]
+  - .pink[GitHub]
 ]
-]
 
 ---
 
-## [introds.org]()
+class: middle
 
-&lt;img src="img/introds.png" width="80%" style="display: block; margin: auto;" /&gt;
-
----
-
-## Learn
-
-- University's official course management system
-- Go here for:
-  - past announcements
-  - course marks
-  - link to join RStudio Cloud
+# Git and GitHub
 
 ---
 
-## Zoom
-
-- Video calls for student hours, code along sessions, workshops
-- Strongly recommend using the app (vs the web interface)
-- Use your University of Edinburgh provided account
-(sign in using the SSO option with `ed-ac-uk` domain)
-- Links to be emailed
+## Git and GitHub
 
 .pull-left[
-&lt;img src="img/zoom-signin-01.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/git-logo.png" width="25%" style="display: block; margin: auto;" /&gt;
+- Git is a version control system -- like “Track Changes” features from Microsoft Word, on steroids
+- It's not the only version control system, but it's a very popular one
 ]
 .pull-right[
-&lt;img src="img/zoom-signin-01.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/github-logo.png" width="25%" style="display: block; margin: auto;" /&gt;
+- GitHub is the home for your Git-based projects on the internet -- like DropBox but much, much better
+
+- We will use GitHub as a platform for web hosting and collaboration (and as our course management system!)
 ]
 
 ---
 
-## Teams
+## Versioning
 
-&lt;img src="img/teams.png" width="85%" style="display: block; margin: auto;" /&gt;
-
----
-
-## Piazza
-
-Coming soon!
-
-- For all course content related questions
-- Ask **and** answer
-  - Piazza awards at the end of the semester!
-- Before posting, check questions that have already been asked
+&lt;img src="img/lego-steps.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Most importantly...
+## Versioning 
 
-- Stay engaged
+### with human readable messages
 
-- Participate
+&lt;img src="img/lego-steps-commit-messages.png" width="60%" style="display: block; margin: auto;" /&gt;
 
-- Ask questions
+---
+
+## Why do we need version control?
+
+&lt;img src="img/phd_comics_vc.gif" width="35%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## How will we use Git and GitHub?
+
+&lt;img src="img/whole-game-01.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## How will we use Git and GitHub?
+
+&lt;img src="img/whole-game-02.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## How will we use Git and GitHub?
+
+&lt;img src="img/whole-game-03.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## How will we use Git and GitHub?
+
+&lt;img src="img/whole-game-04.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Git and GitHub tips
+
+- There are millions of git commands -- ok, that's an exaggeration, but there are a lot of them -- and very few people know them all. 99% of the time you will use git to add, commit, push, and pull.
+
+--
+- We will be doing Git things and interfacing with GitHub through RStudio, but if you google for help you might come across methods for doing these things in the command line -- skip that and move on to the next resource unless you feel comfortable trying it out.
+
+--
+- There is a great resource for working with git and R: [happygitwithr.com](http://happygitwithr.com/). Some of the content in there is beyond the scope of this course, but it's a good place to look for help.
+
+---
+
+## Tour: Git and GitHub
+
+- Connect an R project to Github repository
+- Working with a local and remote repository
+- Making a change locally, committing, and pushing
+- Making a change on GitHub and pulling
+- There is just a bit more of GitHub that we'll use in this class, but for now this is enough
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

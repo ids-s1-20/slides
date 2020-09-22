@@ -24,18 +24,13 @@ library(sugrrants)
 library(lubridate)
 ```
 
-class: middle
-
-
----
-
 ## Course toolkit
 
 <br>
 
 .pull-left[
 ### Course operation
-- [introds.org](https://www.introds.org/)
+- introds.org
 - Learn
 - Zoom
 - Teams
@@ -43,12 +38,14 @@ class: middle
 ]
 .pull-right[
 ### Doing data science
-- R
-- RStudio
-- R Markdown
-- tidyverse
-- Git
-- GitHub
+- Programming:
+  - R
+  - RStudio
+  - tidyverse
+  - R Markdown
+- Version control and collaboration:
+  - Git
+  - GitHub
 ]
 
 ---
@@ -59,21 +56,23 @@ class: middle
 
 .pull-left[
 ### .pink[Course operation]
-- [introds.org](https://www.introds.org/)
-- Learn
-- Zoom
-- Teams
-- Piazza
+- .pink[introds.org]
+- .pink[Learn]
+- .pink[Zoom]
+- .pink[Teams]
+- .pink[Piazza]
 ]
 .pull-right[
 ### .gray[Doing data science]
 .gray[
-- R
-- RStudio
-- R Markdown
-- tidyverse
-- Git
-- GitHub
+- Programming:
+  - R
+  - RStudio
+  - tidyverse
+  - R Markdown
+- Version control and collaboration:
+  - Git
+  - GitHub
 ]
 ]
 
