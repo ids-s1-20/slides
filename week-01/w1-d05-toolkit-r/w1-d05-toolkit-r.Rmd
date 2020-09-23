@@ -64,7 +64,7 @@ By the end of the course, you will be able to...
 - gain insight from data, **reproducibly**
 
 --
-- gain insight from data, reproducibly, **using modern programming techniques**
+- gain insight from data, reproducibly, **using modern programming tools and techniques**
 
 --
 - gain insight from data, reproducibly **and collaboratively**, using modern programming tools and techniques
@@ -130,7 +130,7 @@ knitr::include_graphics("img/r-logo.png")
 knitr::include_graphics("img/rstudio-logo.png")
 ```
 - RStudio is a convenient interface for R called an **IDE** (integrated development environment), e.g. *"I write R code in the RStudio IDE"*
-- RStudio is not a requirement for programming with R, but it's the very commonly used by R programmers and data scientists
+- RStudio is not a requirement for programming with R, but it's very commonly used by R programmers and data scientists
 ]
 
 

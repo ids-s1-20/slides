@@ -150,8 +150,16 @@ knitr::include_graphics("img/whole-game-04.png")
 
 ## Tour: Git and GitHub
 
-- Connect an R project to Github repository
-- Working with a local and remote repository
-- Making a change locally, committing, and pushing
-- Making a change on GitHub and pulling
-- There is just a bit more of GitHub that we'll use in this class, but for now this is enough
+- Create a GitHub account
+- Verify your GitHub email
+- Adjust your GitHub settings for a more pleasant GitHub experience
+
+<br>
+
+*Next week...*
+
+*Work with R, RStudio, Git, and GitHub together!*<sup>+</sup>
+
+.footnote[
+<sup>+</sup>Just like a real data scientist!
+]
