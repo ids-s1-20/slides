@@ -153,6 +153,8 @@ knitr::include_graphics("img/whole-game-04.png")
 - Create a GitHub account
 - Verify your GitHub email
 - Adjust your GitHub settings for a more pleasant GitHub experience
+  - Settings > Emails > Uncheck "Keep my email address private"
+  - Settings > Emails > Update name and photo
 
 <br>
 
