@@ -41,7 +41,7 @@ layout: true
 
 class: middle
 
-# Identifying variables
+# Terminology
 
 ---
 
@@ -57,6 +57,12 @@ class: middle
 
 - **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
 - If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
+
+# Data
 
 ---
 
@@ -200,7 +206,12 @@ ggplot(loans, aes(x = loan_amount)) +
   geom_histogram()
 ```
 
-&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+```
+## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.
+```
+
+&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-5-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -225,7 +236,7 @@ ggplot(loans, aes(x = loan_amount)) +
 
 &lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 ]
-.panel[.panel-name[binwidth = 10000]
+.panel[.panel-name[binwidth = 20000]
 
 ```r
 ggplot(loans, aes(x = loan_amount)) +
@@ -328,7 +339,7 @@ ggplot(loans, aes(x = loan_amount)) +
 ## Density plots and adjusting bandwidth
 
 .panelset[
-.panel[.panel-name[bandwidth = 0.5]
+.panel[.panel-name[adjust = 0.5]
 
 ```r
 ggplot(loans, aes(x = loan_amount)) +
@@ -337,7 +348,7 @@ ggplot(loans, aes(x = loan_amount)) +
 
 &lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 ]
-.panel[.panel-name[bandwidth = 1]
+.panel[.panel-name[adjust = 1]
 
 ```r
 ggplot(loans, aes(x = loan_amount)) +
@@ -346,7 +357,7 @@ ggplot(loans, aes(x = loan_amount)) +
 
 &lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 ]
-.panel[.panel-name[bandwidth = 2]
+.panel[.panel-name[adjust = 2]
 
 ```r
 ggplot(loans, aes(x = loan_amount)) +
@@ -416,7 +427,7 @@ class: middle
 
 
 ```r
-ggplot(loans, aes(x = annual_income)) +
+ggplot(loans, aes(x = interest_rate)) +
   geom_boxplot()
 ```
 
@@ -428,7 +439,7 @@ ggplot(loans, aes(x = annual_income)) +
 
 
 ```r
-ggplot(loans, aes(x = interest_rate)) +
+ggplot(loans, aes(x = annual_income)) +
   geom_boxplot()
 ```
 
@@ -436,23 +447,11 @@ ggplot(loans, aes(x = interest_rate)) +
 
 ---
 
-## Box plot and outliers
-
-
-```r
-ggplot(loans, aes(x = annual_income)) +
-  geom_boxplot()
-```
-
-&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-20-1.png" width="60%" style="display: block; margin: auto;" /&gt;
-
----
-
 ## Customizing box plots
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-21-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-20-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
@@ -478,7 +477,7 @@ ggplot(loans, aes(x = interest_rate)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-21-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
@@ -512,7 +511,7 @@ ggplot(loans, aes(x = debt_to_income, y = interest_rate)) +
   geom_point()
 ```
 
-&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-23-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -524,7 +523,7 @@ ggplot(loans, aes(x = debt_to_income, y = interest_rate)) +
   geom_hex()
 ```
 
-&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-24-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-23-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -537,7 +536,7 @@ ggplot(loans %&gt;% filter(debt_to_income &lt; 100),
   geom_hex()
 ```
 
-&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-25-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w2-d04-viz-num_files/figure-html/unnamed-chunk-24-1.png" width="60%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

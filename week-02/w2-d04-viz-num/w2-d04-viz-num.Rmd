@@ -20,11 +20,13 @@ output:
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(openintro)
+loans_full_schema <- loans_full_schema %>%
+  mutate(grade = factor(grade, ordered = TRUE))
 ```
 
 class: middle
 
-# Identifying variables
+# Terminology
 
 ---
 
@@ -40,6 +42,12 @@ class: middle
 
 - **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
 - If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+class: middle
+
+# Data
 
 ---
 
@@ -142,7 +150,7 @@ class: middle
 
 ## Histogram
 
-```{r}
+```{r message = TRUE, out.width = "50%"}
 ggplot(loans, aes(x = loan_amount)) +
   geom_histogram()
 ```
@@ -164,7 +172,7 @@ ggplot(loans, aes(x = loan_amount)) +
   geom_histogram(binwidth = 5000)
 ```
 ]
-.panel[.panel-name[binwidth = 10000]
+.panel[.panel-name[binwidth = 20000]
 ```{r out.width = "50%"}
 ggplot(loans, aes(x = loan_amount)) +
   geom_histogram(binwidth = 20000)
@@ -261,19 +269,19 @@ ggplot(loans, aes(x = loan_amount)) +
 ## Density plots and adjusting bandwidth
 
 .panelset[
-.panel[.panel-name[bandwidth = 0.5]
+.panel[.panel-name[adjust = 0.5]
 ```{r out.width = "50%"}
 ggplot(loans, aes(x = loan_amount)) +
   geom_density(adjust = 0.5)
 ```
 ]
-.panel[.panel-name[bandwidth = 1]
+.panel[.panel-name[adjust = 1]
 ```{r out.width = "50%"}
 ggplot(loans, aes(x = loan_amount)) +
   geom_density(adjust = 1) # default bandwidth
 ```
 ]
-.panel[.panel-name[bandwidth = 2]
+.panel[.panel-name[adjust = 2]
 ```{r out.width = "50%"}
 ggplot(loans, aes(x = loan_amount)) +
   geom_density(adjust = 2)
@@ -337,15 +345,6 @@ class: middle
 ---
 
 ## Box plot
-
-```{r}
-ggplot(loans, aes(x = annual_income)) +
-  geom_boxplot()
-```
-
----
-
-## Box plot and outliers
 
 ```{r}
 ggplot(loans, aes(x = interest_rate)) +

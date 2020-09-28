@@ -20,6 +20,8 @@ output:
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(openintro)
+loans_full_schema <- loans_full_schema %>%
+  mutate(grade = factor(grade, ordered = TRUE))
 ```
 
 class: middle
@@ -28,23 +30,20 @@ class: middle
 
 ---
 
-## Types of variables
+## Variables
 
-- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+- **Numerical** variables can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
 - If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
 
 ---
 
-## Data: Lending Club
-
-```{r echo=FALSE, out.width = "20%", fig.align = "right"}
-knitr::include_graphics("img/lending-club.png")
-```
+### Data 
 
 ```{r}
+library(openintro)
 loans <- loans_full_schema %>%
   select(loan_amount, interest_rate, term, grade, 
-         state, annual_income, homeownership)
+         state, annual_income, homeownership, debt_to_income)
 glimpse(loans)
 ```
 
@@ -85,7 +84,7 @@ ggplot(loans, aes(x = homeownership, fill = grade)) +
 ---
 
 .question[
-Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?
+Which bar plot is a more useful representation for visualizing the relationship between homeownership and grade?
 ]
 
 .pull-left[
@@ -112,14 +111,15 @@ ggplot(loans, aes(x = homeownership, fill = grade)) +
 ]
 .panel[.panel-name[Code]
 ```{r bar-custom, fig.show = "hide", warning = FALSE}
-ggplot(loans, aes(y = homeownership, #
+ggplot(loans, aes(y = homeownership, #<<
                   fill = grade)) +
   geom_bar(position = "fill") +
   labs( #<<
     x = "Proportion", #<<
     y = "Homeownership", #<<
     fill = "Grade", #<<
-    title = "Grades of Lending Club loans and homeownership of lendee" #<<
+    title = "Grades of Lending Club loans", #<<
+    subtitle = "and homeownership of lendee" #<<
   ) #<<
 ```
 ]
@@ -135,8 +135,8 @@ class: middle
 
 ## Already talked about...
 
-- Coloring and faceting histograms and density plots
-- Side-by-side histograms
+- Colouring and faceting histograms and density plots
+- Side-by-side box plots
 
 ---
 

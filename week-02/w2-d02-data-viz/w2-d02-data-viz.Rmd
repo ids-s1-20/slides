@@ -101,7 +101,7 @@ class: middle
 
 ## What is EDA?
 
-- Exploratory data analysis (EDA) is an approach to analyzing data sets to summarize its main characteristics
+- Exploratory data analysis (EDA) is an approach to analysing data sets to summarize its main characteristics
 - Often, this is visual -- this is what we'll focus on first
 - But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the analysis -- this is what we'll focus on next
 
@@ -110,7 +110,7 @@ class: middle
 ## Mass vs. height
 
 .question[ 
-How would you describe tje relationship between mass and height of Starwars characters?
+How would you describe the relationship between mass and height of Starwars characters?
 What other variables would help us understand data points that don't follow the overall trend?
 Who is the not so tall but really chubby character?
 ]

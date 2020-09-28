@@ -41,7 +41,8 @@ knitr::include_graphics("img/ggplot2-part-of-tidyverse.png")
 
 ```{r eval = FALSE}
 ggplot(data = [dataset], 
-       mapping = aes(x = [x-variable], y = [y-variable])) +
+       mapping = aes(x = [x-variable], 
+                     y = [y-variable])) +
    geom_xxx() +
    other options
 ```
