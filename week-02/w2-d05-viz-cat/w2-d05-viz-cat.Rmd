@@ -1,0 +1,160 @@
+---
+title: "Visualising categorical data"
+subtitle: "<br><br> Introduction to Data Science"
+author: "[introds.org](https://introds.org/)"
+date: "<br> Dr. Mine Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: ["../../xaringan-themer.css", "../../slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(openintro)
+```
+
+class: middle
+
+# Recap
+
+---
+
+## Types of variables
+
+- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively.
+- If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
+
+---
+
+## Data: Lending Club
+
+```{r echo=FALSE, out.width = "20%", fig.align = "right"}
+knitr::include_graphics("img/lending-club.png")
+```
+
+```{r}
+loans <- loans_full_schema %>%
+  select(loan_amount, interest_rate, term, grade, 
+         state, annual_income, homeownership)
+glimpse(loans)
+```
+
+---
+
+class: middle
+
+# Bar plot
+
+---
+
+## Bar plot
+
+```{r}
+ggplot(loans, aes(x = homeownership)) +
+  geom_bar()
+```
+
+---
+
+## Segmented bar plot
+
+```{r}
+ggplot(loans, aes(x = homeownership, 
+                  fill = grade)) + #<<
+  geom_bar()
+```
+
+---
+
+## Segmented bar plot
+
+```{r}
+ggplot(loans, aes(x = homeownership, fill = grade)) +
+  geom_bar(position = "fill") #<<
+```
+
+---
+
+.question[
+Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?
+]
+
+.pull-left[
+```{r echo=FALSE, out.width = "100%"}
+ggplot(loans, aes(x = homeownership, fill = grade)) +
+  geom_bar()
+```
+]
+.pull-right[
+```{r echo=FALSE, out.width = "100%"}
+ggplot(loans, aes(x = homeownership, fill = grade)) +
+  geom_bar(position = "fill")
+```
+]
+
+---
+
+## Customizing bar plots
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "bar-custom", echo = FALSE, warning = FALSE}
+```
+]
+.panel[.panel-name[Code]
+```{r bar-custom, fig.show = "hide", warning = FALSE}
+ggplot(loans, aes(y = homeownership, #
+                  fill = grade)) +
+  geom_bar(position = "fill") +
+  labs( #<<
+    x = "Proportion", #<<
+    y = "Homeownership", #<<
+    fill = "Grade", #<<
+    title = "Grades of Lending Club loans and homeownership of lendee" #<<
+  ) #<<
+```
+]
+]
+
+---
+
+class: middle
+
+# Relationships between numerical and categorical variables
+
+---
+
+## Already talked about...
+
+- Coloring and faceting histograms and density plots
+- Side-by-side histograms
+
+---
+
+## Violin plots
+
+```{r warning = FALSE}
+ggplot(loans, aes(x = homeownership, y = loan_amount)) +
+  geom_violin()
+```
+
+---
+
+## Ridge plots
+
+```{r warning = FALSE}
+library(ggridges)
+ggplot(loans, aes(x = loan_amount, y = grade, fill = grade, color = grade)) + 
+  geom_density_ridges(alpha = 0.5)
+```
+
+---
