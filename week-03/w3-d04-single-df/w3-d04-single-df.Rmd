@@ -19,7 +19,6 @@ output:
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-xaringanExtra::use_panelset()
 ```
 
 class: middle

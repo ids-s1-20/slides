@@ -105,14 +105,13 @@ Source: [US Census Fact Finder, General Economic Characteristics, ACS 2017](http
 
 ---
 
+## Displaying vs. summarising data
+
+.panelset[
+
+.panel[.panel-name[Output]
+
 .pull-left[
-## Displaying data
-
-
-```r
-starwars %&gt;%
-  select(name, height, mass)
-```
 
 ```
 ## # A tibble: 87 x 3
@@ -128,25 +127,41 @@ starwars %&gt;%
 ```
 ]
 .pull-right[
-## Summarizing data
 
+```
+## # A tibble: 3 x 2
+##   gender    avg_ht
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 feminine    165.
+## 2 masculine   177.
+## 3 &lt;NA&gt;        181.
+```
+]
+
+]
+
+.panel[.panel-name[Code]
+
+.pull-left[
+
+```r
+starwars %&gt;%
+  select(name, height, mass)
+```
+]
+.pull-right[
 
 ```r
 starwars %&gt;%
   group_by(gender) %&gt;%
   summarize(
-    avg_height = round(mean(height, na.rm = TRUE), 2)
-  )
+    avg_ht = mean(height, na.rm = TRUE)
+    )
 ```
+]
 
-```
-## # A tibble: 3 x 2
-##   gender    avg_height
-##   &lt;chr&gt;          &lt;dbl&gt;
-## 1 feminine        165.
-## 2 masculine       177.
-## 3 &lt;NA&gt;            181.
-```
+]
+
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
