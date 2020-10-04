@@ -82,7 +82,11 @@ h1, h2, h3 {
 }
 
 /* Font sizes */
-.huge { font-size: 400% }
+.huge {
+   font-family: 'Montserrat', sans-serif;
+   font-size: 400%;
+   font-weight: bold;
+}
 .larger { font-size: 250% }
 .large { font-size: 150% }
 .midi { font-size: 85% }
