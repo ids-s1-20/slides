@@ -41,9 +41,9 @@ layout: true
 
 class: middle
 
-.hand[You...]
+# .hand[You...]
 
-.huge[.light-blue[have]] .hand[multiple data frames]
+.huge[.green[have]] .hand[multiple data frames]
 
 .huge[.pink[want]] .hand[to bring them together]
 
@@ -231,6 +231,12 @@ nrow(works)
 
 ---
 
+class: middle
+
+# Joining data frames
+
+---
+
 ## Joining data frames
 
 ```
@@ -314,7 +320,8 @@ left_join(x, y)
 
 
 ```r
-left_join(professions, dates)
+professions %&gt;%
+* left_join(dates)
 ```
 
 ```
@@ -363,7 +370,8 @@ right_join(x, y)
 
 
 ```r
-right_join(professions, dates)
+professions %&gt;%
+* right_join(dates)
 ```
 
 ```
@@ -410,7 +418,8 @@ full_join(x, y)
 
 
 ```r
-right_join(dates, works)
+dates %&gt;%
+* right_join(works)
 ```
 
 ```
@@ -456,7 +465,8 @@ inner_join(x, y)
 
 
 ```r
-inner_join(dates, works)
+dates %&gt;%
+* inner_join(works)
 ```
 
 ```
@@ -500,7 +510,8 @@ semi_join(x, y)
 
 
 ```r
-semi_join(dates, works)
+dates %&gt;%
+* semi_join(works)
 ```
 
 ```
@@ -543,7 +554,8 @@ anti_join(x, y)
 
 
 ```r
-anti_join(dates, works)
+dates %&gt;%
+* anti_join(works)
 ```
 
 ```
@@ -573,6 +585,244 @@ anti_join(dates, works)
 ##  9 Flossie… Virologist a…       1947         NA first scientist …
 ## 10 Jennife… Biochemist          1964         NA one of the prima…
 ```
+
+---
+
+class: middle
+
+# Data joins in practice
+
+---
+
+## Students
+
+- Have:
+  - Enrolment: official university enrolment records
+  - Survey: Student provided info missing students who never filled it out and including students who filled it out but dropped the class
+- Want: Survey info for all enrolled in class 
+
+.pull-left[
+
+```r
+enrolment &lt;- read_csv("data/student-enrolment.csv")
+enrolment
+```
+
+```
+## # A tibble: 3 x 2
+##   student_id student_name
+##        &lt;dbl&gt; &lt;chr&gt;       
+## 1          1 Dave        
+## 2          2 Hermine     
+## 3          3 Sura
+```
+]
+.pull-right[
+
+```r
+survey &lt;- read_csv("data/student-survey.csv")
+survey
+```
+
+```
+## # A tibble: 4 x 3
+##   student_id student_name gihub               
+##        &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;               
+## 1          2 Hermine      bakealongwithhermine
+## 2          3 Sura         surasbakes          
+## 3          4 Peter        peter_bakes         
+## 4          5 Mark         thebakingbuddha
+```
+]
+
+---
+
+## Students
+
+.panelset[
+
+.panel[.panel-name[In class]
+
+```r
+enrolment %&gt;% 
+* left_join(survey)
+```
+
+```
+## # A tibble: 3 x 3
+##   student_id student_name gihub               
+##        &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;               
+## 1          1 Dave         &lt;NA&gt;                
+## 2          2 Hermine      bakealongwithhermine
+## 3          3 Sura         surasbakes
+```
+]
+
+.panel[.panel-name[Survey missing]
+
+```r
+enrolment %&gt;% 
+* anti_join(survey)
+```
+
+```
+## # A tibble: 1 x 2
+##   student_id student_name
+##        &lt;dbl&gt; &lt;chr&gt;       
+## 1          1 Dave
+```
+]
+
+.panel[.panel-name[Dropped]
+
+```r
+survey %&gt;% 
+* anti_join(enrolment)
+```
+
+```
+## # A tibble: 2 x 3
+##   student_id student_name gihub          
+##        &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;          
+## 1          4 Peter        peter_bakes    
+## 2          5 Mark         thebakingbuddha
+```
+]
+
+]
+
+---
+
+## Sales
+
+- Have:
+  - Sales data: One row per customer per item, listing purchases they made
+  - Price data: One row per item in the store, listing their prices
+- Want: Total revenue
+
+.pull-left[
+
+```r
+sales &lt;- read_csv("data/sales.csv")
+sales
+```
+
+```
+## # A tibble: 6 x 2
+##   customer_id item        
+##         &lt;dbl&gt; &lt;chr&gt;       
+## 1           1 bread       
+## 2           1 milk        
+## 3           1 banana      
+## 4           2 milk        
+## 5           2 avocado     
+## 6           2 toilet paper
+```
+]
+.pull-right[
+
+```r
+prices &lt;- read_csv("data/prices.csv")
+prices
+```
+
+```
+## # A tibble: 5 x 2
+##   item         price
+##   &lt;chr&gt;        &lt;dbl&gt;
+## 1 avocado       0.5 
+## 2 banana        0.15
+## 3 bread         1   
+## 4 milk          0.8 
+## 5 toilet paper  3
+```
+]
+
+---
+
+## Sales
+
+.panelset[
+
+.panel[.panel-name[Total revenue]
+.pull-left[
+
+```r
+sales %&gt;% 
+* left_join(prices)
+```
+
+```
+## # A tibble: 6 x 3
+##   customer_id item         price
+##         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+## 1           1 bread         1   
+## 2           1 milk          0.8 
+## 3           1 banana        0.15
+## 4           2 milk          0.8 
+## 5           2 avocado       0.5 
+## 6           2 toilet paper  3
+```
+]
+.pull-right[
+
+```r
+sales %&gt;% 
+  left_join(prices) %&gt;%
+* summarise(total_revenue = sum(price))
+```
+
+```
+## # A tibble: 1 x 1
+##   total_revenue
+##           &lt;dbl&gt;
+## 1          6.25
+```
+]
+]
+
+.panel[.panel-name[Revenue per customer]
+
+.pull-left[
+
+```r
+sales %&gt;% 
+  left_join(prices)
+```
+
+```
+## # A tibble: 6 x 3
+##   customer_id item         price
+##         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+## 1           1 bread         1   
+## 2           1 milk          0.8 
+## 3           1 banana        0.15
+## 4           2 milk          0.8 
+## 5           2 avocado       0.5 
+## 6           2 toilet paper  3
+```
+]
+.pull-right[
+
+```r
+sales %&gt;% 
+  left_join(prices) %&gt;%
+* group_by(customer_id) %&gt;%
+  summarise(total_revenue = sum(price))
+```
+
+```
+## # A tibble: 2 x 2
+##   customer_id total_revenue
+##         &lt;dbl&gt;         &lt;dbl&gt;
+## 1           1          1.95
+## 2           2          4.3
+```
+]
+
+]
+
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

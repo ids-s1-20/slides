@@ -28,9 +28,9 @@ options(
 
 class: middle
 
-.hand[You...]
+# .hand[You...]
 
-.huge[.light-blue[have]] .hand[multiple data frames]
+.huge[.green[have]] .hand[multiple data frames]
 
 .huge[.pink[want]] .hand[to bring them together]
 
@@ -112,6 +112,12 @@ nrow(works)
 
 ---
 
+class: middle
+
+# Joining data frames
+
+---
+
 ## Joining data frames
 
 ```
@@ -170,7 +176,8 @@ include_graphics("img/left-join.gif")
 ## `left_join()`
 
 ```{r}
-left_join(professions, dates)
+professions %>%
+  left_join(dates) #<<
 ```
 
 ---
@@ -194,7 +201,8 @@ include_graphics("img/right-join.gif")
 
 
 ```{r}
-right_join(professions, dates)
+professions %>%
+  right_join(dates) #<<
 ```
 
 ---
@@ -217,7 +225,8 @@ include_graphics("img/full-join.gif")
 ## `full_join()`
 
 ```{r}
-right_join(dates, works)
+dates %>%
+  right_join(works) #<<
 ```
 
 ---
@@ -240,7 +249,8 @@ include_graphics("img/inner-join.gif")
 ## `inner_join()`
 
 ```{r}
-inner_join(dates, works)
+dates %>%
+  inner_join(works) #<<
 ```
 
 ---
@@ -263,7 +273,8 @@ include_graphics("img/semi-join.gif")
 ## `semi_join()`
 
 ```{r}
-semi_join(dates, works)
+dates %>%
+  semi_join(works) #<<
 ```
 
 ---
@@ -286,7 +297,8 @@ include_graphics("img/anti-join.gif")
 ## `anti_join()`
 
 ```{r}
-anti_join(dates, works)
+dates %>%
+  anti_join(works) #<<
 ```
 
 ---
@@ -298,3 +310,125 @@ professions %>%
   left_join(dates) %>%
   left_join(works)
 ```
+
+---
+
+class: middle
+
+# Data joins in practice
+
+---
+
+## Students
+
+- Have:
+  - Enrolment: official university enrolment records
+  - Survey: Student provided info missing students who never filled it out and including students who filled it out but dropped the class
+- Want: Survey info for all enrolled in class 
+
+.pull-left[
+```{r message = FALSE}
+enrolment <- read_csv("data/student-enrolment.csv")
+enrolment
+```
+]
+.pull-right[
+```{r message = FALSE}
+survey <- read_csv("data/student-survey.csv")
+survey
+```
+]
+
+---
+
+## Students
+
+.panelset[
+
+.panel[.panel-name[In class]
+```{r}
+enrolment %>% 
+  left_join(survey) #<<
+```
+]
+
+.panel[.panel-name[Survey missing]
+```{r}
+enrolment %>% 
+  anti_join(survey) #<<
+```
+]
+
+.panel[.panel-name[Dropped]
+```{r}
+survey %>% 
+  anti_join(enrolment) #<<
+```
+]
+
+]
+
+---
+
+## Sales
+
+- Have:
+  - Sales data: One row per customer per item, listing purchases they made
+  - Price data: One row per item in the store, listing their prices
+- Want: Total revenue
+
+.pull-left[
+```{r message = FALSE}
+sales <- read_csv("data/sales.csv")
+sales
+```
+]
+.pull-right[
+```{r message = FALSE}
+prices <- read_csv("data/prices.csv")
+prices
+```
+]
+
+---
+
+## Sales
+
+.panelset[
+
+.panel[.panel-name[Total revenue]
+.pull-left[
+```{r}
+sales %>% 
+  left_join(prices) #<<
+```
+]
+.pull-right[
+```{r}
+sales %>% 
+  left_join(prices) %>%
+  summarise(total_revenue = sum(price)) #<<
+```
+]
+]
+
+.panel[.panel-name[Revenue per customer]
+
+.pull-left[
+```{r}
+sales %>% 
+  left_join(prices)
+```
+]
+.pull-right[
+```{r}
+sales %>% 
+  left_join(prices) %>%
+  group_by(customer_id) %>% #<<
+  summarise(total_revenue = sum(price))
+```
+]
+
+]
+
+]

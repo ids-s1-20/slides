@@ -23,9 +23,9 @@ library(tidyverse)
 
 class: middle
 
-.hand[You...]
+# .hand[You...]
 
-.huge[.light-blue[have]] .hand[a single data frame]
+.huge[.green[have]] .hand[a single data frame]
 
 .huge[.pink[want]] .hand[to slice it, and dice it, and juice it, and process it]
 
