@@ -28,7 +28,7 @@ options(
 
 class: middle
 
-# .hand[You...]
+# .hand[We...]
 
 .huge[.green[have]] .hand[multiple data frames]
 
@@ -36,13 +36,18 @@ class: middle
 
 ---
 
+```{r include=FALSE}
+professions <- read_csv("data/scientists/professions.csv")
+dates <- read_csv("data/scientists/dates.csv")
+works <- read_csv("data/scientists/works.csv")
+```
+
 ## Data: Women in science 
 
 Information on 10 women in science who changed the world
 
 .small[
-```{r echo=FALSE, message=FALSE}
-professions <- read_csv("data/professions.csv")
+```{r echo=FALSE}
 professions %>% select(name) %>% kable()
 ```
 ]
@@ -59,22 +64,19 @@ Source: [Discover Magazine](https://www.discovermagazine.com/the-sciences/meet-1
 .panelset[
 
 .panel[.panel-name[professions]
-```{r message = FALSE}
-professions <- read_csv("data/professions.csv")
+```{r}
 professions
 ```
 ]
 
 .panel[.panel-name[dates]
-```{r message = FALSE}
-dates <- read_csv("data/dates.csv")
+```{r}
 dates
 ```
 ]
 
 .panel[.panel-name[works]
-```{r message = FALSE}
-works <- read_csv("data/works.csv")
+```{r}
 works
 ```
 ]
@@ -120,7 +122,7 @@ class: middle
 
 ## Joining data frames
 
-```
+```{r eval=FALSE}
 something_join(x, y)
 ```
 
@@ -161,13 +163,13 @@ y
 ## `left_join()`
 
 .pull-left[
-```{r}
-left_join(x, y)
+```{r echo=FALSE, out.width="80%", out.extra ='style="background-color: #FDF6E3"'}
+include_graphics("img/left-join.gif")
 ```
 ]
 .pull-right[
-```{r echo=FALSE, out.width="80%"}
-include_graphics("img/left-join.gif")
+```{r}
+left_join(x, y)
 ```
 ]
 
@@ -185,13 +187,13 @@ professions %>%
 ## `right_join()`
 
 .pull-left[
-```{r}
-right_join(x, y)
+```{r echo=FALSE, out.width="80%", out.extra ='style="background-color: #FDF6E3"'}
+include_graphics("img/right-join.gif")
 ```
 ]
 .pull-right[
-```{r echo=FALSE, out.width="80%"}
-include_graphics("img/right-join.gif")
+```{r}
+right_join(x, y)
 ```
 ]
 
@@ -210,13 +212,13 @@ professions %>%
 ## `full_join()`
 
 .pull-left[
-```{r}
-full_join(x, y)
+```{r echo=FALSE, out.width="80%", out.extra ='style="background-color: #FDF6E3"'}
+include_graphics("img/full-join.gif")
 ```
 ]
 .pull-right[
-```{r echo=FALSE, out.width="80%"}
-include_graphics("img/full-join.gif")
+```{r}
+full_join(x, y)
 ```
 ]
 
@@ -234,13 +236,13 @@ dates %>%
 ## `inner_join()`
 
 .pull-left[
-```{r}
-inner_join(x, y)
+```{r echo=FALSE, out.width="80%", out.extra ='style="background-color: #FDF6E3"'}
+include_graphics("img/inner-join.gif")
 ```
 ]
 .pull-right[
-```{r echo=FALSE, out.width="80%"}
-include_graphics("img/inner-join.gif")
+```{r}
+inner_join(x, y)
 ```
 ]
 
@@ -258,13 +260,13 @@ dates %>%
 ## `semi_join()`
 
 .pull-left[
-```{r}
-semi_join(x, y)
+```{r echo=FALSE, out.width="80%", out.extra ='style="background-color: #FDF6E3"'}
+include_graphics("img/semi-join.gif")
 ```
 ]
 .pull-right[
-```{r echo=FALSE, out.width="80%"}
-include_graphics("img/semi-join.gif")
+```{r}
+semi_join(x, y)
 ```
 ]
 
@@ -282,13 +284,13 @@ dates %>%
 ## `anti_join()`
 
 .pull-left[
-```{r}
-anti_join(x, y)
+```{r echo=FALSE, out.width="80%", out.extra ='style="background-color: #FDF6E3"'}
+include_graphics("img/anti-join.gif")
 ```
 ]
 .pull-right[
-```{r echo=FALSE, out.width="80%"}
-include_graphics("img/anti-join.gif")
+```{r}
+anti_join(x, y)
 ```
 ]
 
@@ -305,7 +307,7 @@ dates %>%
 
 ## Putting it altogether
 
-```{r echo=FALSE}
+```{r}
 professions %>%
   left_join(dates) %>%
   left_join(works)
@@ -315,7 +317,7 @@ professions %>%
 
 class: middle
 
-# Data joins in practice
+# Joining data, in practice
 
 ---
 
@@ -326,15 +328,20 @@ class: middle
   - Survey: Student provided info missing students who never filled it out and including students who filled it out but dropped the class
 - Want: Survey info for all enrolled in class 
 
+--
+
+```{r include=FALSE}
+enrolment <- read_csv("data/students/enrolment.csv")
+survey <- read_csv("data/students/survey.csv")
+```
+
 .pull-left[
 ```{r message = FALSE}
-enrolment <- read_csv("data/student-enrolment.csv")
 enrolment
 ```
 ]
 .pull-right[
 ```{r message = FALSE}
-survey <- read_csv("data/student-survey.csv")
 survey
 ```
 ]
@@ -348,21 +355,21 @@ survey
 .panel[.panel-name[In class]
 ```{r}
 enrolment %>% 
-  left_join(survey) #<<
+  left_join(survey, by = "id") #<<
 ```
 ]
 
 .panel[.panel-name[Survey missing]
 ```{r}
 enrolment %>% 
-  anti_join(survey) #<<
+  anti_join(survey, by = "id") #<<
 ```
 ]
 
 .panel[.panel-name[Dropped]
 ```{r}
 survey %>% 
-  anti_join(enrolment) #<<
+  anti_join(enrolment, by = "id") #<<
 ```
 ]
 
@@ -377,15 +384,20 @@ survey %>%
   - Price data: One row per item in the store, listing their prices
 - Want: Total revenue
 
+--
+
+```{r include=FALSE}
+purchases <- read_csv("data/sales/purchases.csv")
+prices <- read_csv("data/sales/prices.csv")
+```
+
 .pull-left[
 ```{r message = FALSE}
-sales <- read_csv("data/sales.csv")
-sales
+purchases
 ```
 ]
 .pull-right[
 ```{r message = FALSE}
-prices <- read_csv("data/prices.csv")
 prices
 ```
 ]
@@ -399,13 +411,13 @@ prices
 .panel[.panel-name[Total revenue]
 .pull-left[
 ```{r}
-sales %>% 
+purchases %>% 
   left_join(prices) #<<
 ```
 ]
 .pull-right[
 ```{r}
-sales %>% 
+purchases %>% 
   left_join(prices) %>%
   summarise(total_revenue = sum(price)) #<<
 ```
@@ -416,13 +428,13 @@ sales %>%
 
 .pull-left[
 ```{r}
-sales %>% 
+purchases %>% 
   left_join(prices)
 ```
 ]
 .pull-right[
 ```{r}
-sales %>% 
+purchases %>% 
   left_join(prices) %>%
   group_by(customer_id) %>% #<<
   summarise(total_revenue = sum(price))
