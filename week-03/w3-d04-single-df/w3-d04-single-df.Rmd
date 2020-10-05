@@ -23,7 +23,7 @@ library(tidyverse)
 
 class: middle
 
-# .hand[You...]
+# .hand[We...]
 
 .huge[.green[have]] .hand[a single data frame]
 
@@ -386,7 +386,7 @@ hotels %>%
 hotels %>%
   mutate(little_ones = children + babies) %>%
   filter(
-    little_ones > 1,
+    little_ones >= 1,
     hotel == "City Hotel"
     )  %>%
   select(hotel, little_ones)

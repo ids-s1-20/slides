@@ -266,12 +266,12 @@ x
 ```
 
 ```
-## # A tibble: 3 x 1
-##   value
-##   &lt;dbl&gt;
-## 1     1
-## 2     2
-## 3     3
+## # A tibble: 3 x 2
+##      id value_x
+##   &lt;dbl&gt; &lt;chr&gt;  
+## 1     1 x1     
+## 2     2 x2     
+## 3     3 x3
 ```
 ]
 .pull-right[
@@ -282,12 +282,12 @@ y
 ```
 
 ```
-## # A tibble: 3 x 1
-##   value
-##   &lt;dbl&gt;
-## 1     1
-## 2     2
-## 3     4
+## # A tibble: 3 x 2
+##      id value_y
+##   &lt;dbl&gt; &lt;chr&gt;  
+## 1     1 y1     
+## 2     2 y2     
+## 3     4 y4
 ```
 ]
 
@@ -305,12 +305,12 @@ left_join(x, y)
 ```
 
 ```
-## # A tibble: 3 x 1
-##   value
-##   &lt;dbl&gt;
-## 1     1
-## 2     2
-## 3     3
+## # A tibble: 3 x 3
+##      id value_x value_y
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+## 1     1 x1      y1     
+## 2     2 x2      y2     
+## 3     3 x3      &lt;NA&gt;
 ```
 ]
 
@@ -354,12 +354,12 @@ right_join(x, y)
 ```
 
 ```
-## # A tibble: 3 x 1
-##   value
-##   &lt;dbl&gt;
-## 1     1
-## 2     2
-## 3     4
+## # A tibble: 3 x 3
+##      id value_x value_y
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+## 1     1 x1      y1     
+## 2     2 x2      y2     
+## 3     4 &lt;NA&gt;    y4
 ```
 ]
 
@@ -402,13 +402,13 @@ full_join(x, y)
 ```
 
 ```
-## # A tibble: 4 x 1
-##   value
-##   &lt;dbl&gt;
-## 1     1
-## 2     2
-## 3     3
-## 4     4
+## # A tibble: 4 x 3
+##      id value_x value_y
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+## 1     1 x1      y1     
+## 2     2 x2      y2     
+## 3     3 x3      &lt;NA&gt;   
+## 4     4 &lt;NA&gt;    y4
 ```
 ]
 
@@ -419,22 +419,23 @@ full_join(x, y)
 
 ```r
 dates %&gt;%
-* right_join(works)
+* full_join(works)
 ```
 
 ```
-## # A tibble: 9 x 4
-##   name        birth_year death_year known_for                    
-##   &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                        
-## 1 Janaki Amm…       1897       1984 hybrid species, biodiversity…
-## 2 Chien-Shiu…       1912       1997 confim and refine theory of …
-## 3 Katherine …       1918       2020 calculations of orbital mech…
-## 4 Vera Rubin        1928       2016 existence of dark matter     
-## 5 Gladys West       1930         NA mathematical modeling of the…
-## 6 Flossie Wo…       1947         NA first scientist to clone HIV…
-## 7 Jennifer D…       1964         NA one of the primary developer…
-## 8 Ada Lovela…         NA         NA first computer algorithm     
-## 9 Marie Curie         NA         NA theory of radioactivity,  di…
+## # A tibble: 10 x 4
+##    name       birth_year death_year known_for                    
+##    &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                        
+##  1 Janaki Am…       1897       1984 hybrid species, biodiversity…
+##  2 Chien-Shi…       1912       1997 confim and refine theory of …
+##  3 Katherine…       1918       2020 calculations of orbital mech…
+##  4 Rosalind …       1920       1958 &lt;NA&gt;                         
+##  5 Vera Rubin       1928       2016 existence of dark matter     
+##  6 Gladys We…       1930         NA mathematical modeling of the…
+##  7 Flossie W…       1947         NA first scientist to clone HIV…
+##  8 Jennifer …       1964         NA one of the primary developer…
+##  9 Ada Lovel…         NA         NA first computer algorithm     
+## 10 Marie Cur…         NA         NA theory of radioactivity,  di…
 ```
 
 ---
@@ -451,11 +452,11 @@ inner_join(x, y)
 ```
 
 ```
-## # A tibble: 2 x 1
-##   value
-##   &lt;dbl&gt;
-## 1     1
-## 2     2
+## # A tibble: 2 x 3
+##      id value_x value_y
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+## 1     1 x1      y1     
+## 2     2 x2      y2
 ```
 ]
 
@@ -496,11 +497,11 @@ semi_join(x, y)
 ```
 
 ```
-## # A tibble: 2 x 1
-##   value
-##   &lt;dbl&gt;
-## 1     1
-## 2     2
+## # A tibble: 2 x 2
+##      id value_x
+##   &lt;dbl&gt; &lt;chr&gt;  
+## 1     1 x1     
+## 2     2 x2
 ```
 ]
 
@@ -541,10 +542,10 @@ anti_join(x, y)
 ```
 
 ```
-## # A tibble: 1 x 1
-##   value
-##   &lt;dbl&gt;
-## 1     3
+## # A tibble: 1 x 2
+##      id value_x
+##   &lt;dbl&gt; &lt;chr&gt;  
+## 1     3 x3
 ```
 ]
 

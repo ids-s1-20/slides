@@ -41,7 +41,7 @@ layout: true
 
 class: middle
 
-# .hand[You...]
+# .hand[We...]
 
 .huge[.green[have]] .hand[a single data frame]
 
@@ -783,23 +783,23 @@ hotels %&gt;%
 hotels %&gt;%
   mutate(little_ones = children + babies) %&gt;%
   filter(
-    little_ones &gt; 1,
+    little_ones &gt;= 1,
     hotel == "City Hotel"
     )  %&gt;%
   select(hotel, little_ones)
 ```
 
 ```
-## # A tibble: 2,140 x 2
+## # A tibble: 5,403 x 2
 ##   hotel      little_ones
 ##   &lt;chr&gt;            &lt;dbl&gt;
-## 1 City Hotel           2
-## 2 City Hotel           2
+## 1 City Hotel           1
+## 2 City Hotel           1
 ## 3 City Hotel           2
-## 4 City Hotel           2
-## 5 City Hotel           2
-## 6 City Hotel           2
-## # … with 2,134 more rows
+## 4 City Hotel           1
+## 5 City Hotel           1
+## 6 City Hotel           1
+## # … with 5,397 more rows
 ```
 ]
 ]

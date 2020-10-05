@@ -82,12 +82,15 @@ class: middle
 - Data from two hotels: one resort and one city hotel
 - Observations: Each row represents a hotel booking
 - Goal for original data collection: Development of prediction models to classify a hotel booking's likelihood to be cancelled ([Antonia et al., 2019](https://www.sciencedirect.com/science/article/pii/S2352340918315191#bib5))
-- Featured in [TidyTuesday](https://github.com/rfordatascience/tidytuesday)!
 
 
 ```r
 hotels &lt;- read_csv("data/hotels.csv")
 ```
+
+.footnote[
+Source: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-02-11/readme.md)
+]
 
 ---
 
@@ -155,63 +158,8 @@ glimpse(hotels)
 
 ## Select a single column
 
-View only the `lead_time` type (number of days between booking and arrival date):
+View only `lead_time` (number of days between booking and arrival date):
 
---
-.pull-left[
-
-```r
-select(.data = hotels, lead_time)
-```
-
-```
-## # A tibble: 119,390 x 1
-##   lead_time
-##       &lt;dbl&gt;
-## 1       342
-## 2       737
-## 3         7
-## 4        13
-## 5        14
-## 6        14
-## # … with 119,384 more rows
-```
-]
---
-.pull-right[
-- Start with the function (a verb): `select()`
-- First argument is `.data` (the data frame we're working with) = `hotels`
-- Second argument is variable we want to select: `lead_time`
-- The result is a data frame with 119,300 rows and 1 column: --dplyr functions always 
-expect a data frame and always yield a data frame.
-]
-
----
-
-.tip[
-You can skip the argument name for the first two arguments of a function.
-]
-
-.pull-left[
-
-```r
-select(.data = hotels, lead_time)
-```
-
-```
-## # A tibble: 119,390 x 1
-##   lead_time
-##       &lt;dbl&gt;
-## 1       342
-## 2       737
-## 3         7
-## 4        13
-## 5        14
-## 6        14
-## # … with 119,384 more rows
-```
-]
-.pull-right[
 
 ```r
 select(hotels, lead_time)
@@ -229,7 +177,117 @@ select(hotels, lead_time)
 ## 6        14
 ## # … with 119,384 more rows
 ```
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+*select(
+  hotels, 
+  lead_time
+  )
+```
 ]
+.pull-right[
+- Start with the function (a verb): `select()`
+]
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+select( 
+* hotels,
+  lead_time
+  )
+```
+]
+.pull-right[
+- Start with the function (a verb): `select()`
+- First argument: data frame we're working with , `hotels`
+]
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+select( 
+  hotels, 
+* lead_time
+  )
+```
+]
+.pull-right[
+- Start with the function (a verb): `select()`
+- First argument: data frame we're working with , `hotels`
+- Second argument: variable we want to select, `lead_time`
+]
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+select( 
+  hotels, 
+  lead_time
+  )
+```
+
+```
+## # A tibble: 119,390 x 1
+##   lead_time
+##       &lt;dbl&gt;
+## 1       342
+## 2       737
+## 3         7
+## 4        13
+## 5        14
+## 6        14
+## # … with 119,384 more rows
+```
+]
+.pull-right[
+- Start with the function (a verb): `select()`
+- First argument: data frame we're working with , `hotels`
+- Second argument: variable we want to select, `lead_time`
+- Result: data frame with 119390 rows and 1 column
+]
+
+---
+
+.tip[
+dplyr functions always expect a data frame and always yield a data frame.
+]
+
+
+```r
+select(hotels, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 1
+##   lead_time
+##       &lt;dbl&gt;
+## 1       342
+## 2       737
+## 3         7
+## 4        13
+## 5        14
+## 6        14
+## # … with 119,384 more rows
+```
 
 ---
 
@@ -474,38 +532,12 @@ find("keys") %&gt;%
 
 ---
 
-## What about other arguments?
-
-Use the dot to
-
-- send results to a function argument other than first one or 
-- use the previous result for multiple arguments
-
-
-```r
-hotels %&gt;%
-  filter(hotel == "Resort Hotel") %&gt;%
-* lm(adr ~ lead_time, data = .)
-```
-
-```
-## 
-## Call:
-## lm(formula = adr ~ lead_time, data = .)
-## 
-## Coefficients:
-## (Intercept)    lead_time  
-##    93.16876      0.01925
-```
-
----
-
 ## A note on piping and layering
 
-- The `%&gt;%` operator in **dplyr** functions is called the pipe operator. This means you "pipe" the output of the previous line of code as the first input of the next line of code.
+- `%&gt;%` used mainly in **dplyr** pipelines, *we pipe the output of the previous line of code as the first input of the next line of code*
 
 --
-- The `+` operator in **ggplot2** functions is used for "layering". This means you create the plot in layers, separated by `+`.
+- `+` used in **ggplot2** plots is used for "layering", *we create the plot in layers, separated by `+`*
 
 ---
 
@@ -540,10 +572,7 @@ hotels %&gt;%
 ## 1 Resort Hotel       342
 ## 2 Resort Hotel       737
 ## 3 Resort Hotel         7
-## 4 Resort Hotel        13
-## 5 Resort Hotel        14
-## 6 Resort Hotel        14
-## # … with 119,384 more rows
+...
 ```
 ]
 
@@ -573,7 +602,7 @@ ggplot(hotels, aes(x = hotel, fill = deposit_type)) +
   geom_bar()
 ```
 
-&lt;img src="w3-d03-grammar-wrangle_files/figure-html/unnamed-chunk-21-1.png" width="25%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w3-d03-grammar-wrangle_files/figure-html/unnamed-chunk-23-1.png" width="25%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---

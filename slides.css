@@ -181,10 +181,10 @@ div.my-footer a {
 .question, .your-turn, .tip {
   padding-right: 10px;
   padding-left: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-bottom: 6px;
+  margin-top: 6px;
   color: white;
 }
 
