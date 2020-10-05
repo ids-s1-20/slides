@@ -317,11 +317,11 @@ professions %>%
 
 class: middle
 
-# Joining data, in practice
+# Case study: Student records
 
 ---
 
-## Students
+## Student records
 
 - Have:
   - Enrolment: official university enrolment records
@@ -348,7 +348,7 @@ survey
 
 ---
 
-## Students
+## Student records
 
 .panelset[
 
@@ -377,11 +377,17 @@ survey %>%
 
 ---
 
-## Sales
+class: middle
+
+# Case study: Grocery sales
+
+---
+
+## Grocery sales
 
 - Have:
-  - Sales data: One row per customer per item, listing purchases they made
-  - Price data: One row per item in the store, listing their prices
+  - Purchases: One row per customer per item, listing purchases they made
+  - Prices: One row per item in the store, listing their prices
 - Want: Total revenue
 
 --
@@ -404,7 +410,7 @@ prices
 
 ---
 
-## Sales
+## Grocery sales
 
 .panelset[
 
