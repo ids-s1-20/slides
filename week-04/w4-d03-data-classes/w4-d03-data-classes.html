@@ -161,7 +161,7 @@ class(y)
 
 ## More on dates
 
-We can think of factors like an integer (the number of days since the origin, 1 Jan 1970) and an integer (the origin) glued together
+We can think of dates like an integer (the number of days since the origin, 1 Jan 1970) and an integer (the origin) glued together
 
 
 ```r
@@ -348,8 +348,9 @@ cat_lovers %&gt;%
 .your-turn[
 ### .hand[Your turn!]
 
-- [RStudio Cloud](http://rstd.io/dsbox-cloud) &gt; `AE 06 - Hotels + Data types` &gt; `hotels-forcats.Rmd` &gt; knit
-- Recreate the following. The x-axis first, then, as a stretch goal, the y-axis.
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) &gt; `AE 05 - Hotels + Data types` &gt; `hotels-forcats.Rmd` &gt; knit
+- Recreate the x-axis of the following plot. 
+- **Stertch goal:** Recreate the y-axis.
 ]
 ]
 
@@ -409,7 +410,7 @@ hotels %&gt;%
 
 ---
 
-## Step 1. Put together dates
+## Step 1. Construct dates
 
 .midi[
 
@@ -420,27 +421,24 @@ hotels %&gt;%
   mutate(
 *   arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")
     ) %&gt;% 
-  select(starts_with("arrival_"))
+  relocate(arrival_date)
 ```
 
 ```
-## # A tibble: 119,390 x 5
-##   arrival_date_ye… arrival_date_mo… arrival_date_we…
-##              &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;
-## 1             2015 July                           27
-## 2             2015 July                           27
-## 3             2015 July                           27
-## 4             2015 July                           27
-## 5             2015 July                           27
-## 6             2015 July                           27
-## # … with 119,384 more rows, and 2 more variables:
-## #   arrival_date_day_of_month &lt;dbl&gt;, arrival_date &lt;glue&gt;
+## # A tibble: 119,390 x 33
+##   arrival_date hotel is_canceled lead_time arrival_date_ye…
+##   &lt;glue&gt;       &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;
+## 1 2015 July 1  Reso…           0       342             2015
+## 2 2015 July 1  Reso…           0       737             2015
+## 3 2015 July 1  Reso…           0         7             2015
+## 4 2015 July 1  Reso…           0        13             2015
+...
 ```
 ]
 
 ---
 
-## Step 2. Count number of bookings / date
+## Step 2. Count bookings per date
 
 .midi[
 
@@ -466,7 +464,7 @@ hotels %&gt;%
 
 ---
 
-## Step 3. Visualise number of bookings / date
+## Step 3. Visualise bookings per date
 
 .midi[
 
@@ -478,7 +476,7 @@ hotels %&gt;%
   geom_line()
 ```
 
-&lt;img src="w4-d03-data-classes_files/figure-html/unnamed-chunk-23-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w4-d03-data-classes_files/figure-html/unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -490,12 +488,12 @@ Why does the plot start with August when we know our data start in July? And why
 ]
 
 .midi[
-&lt;img src="w4-d03-data-classes_files/figure-html/unnamed-chunk-24-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w4-d03-data-classes_files/figure-html/unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-## Step 1. `REVISED` Put together dates `as dates`.
+## Step 1. *REVISED* Construct dates "as dates"
 
 .midi[
 
@@ -506,27 +504,24 @@ hotels %&gt;%
   mutate(
 *   arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}"))
     ) %&gt;% 
-  select(starts_with("arrival_"))
+  relocate(arrival_date)
 ```
 
 ```
-## # A tibble: 119,390 x 5
-##   arrival_date_ye… arrival_date_mo… arrival_date_we…
-##              &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;
-## 1             2015 July                           27
-## 2             2015 July                           27
-## 3             2015 July                           27
-## 4             2015 July                           27
-## 5             2015 July                           27
-## 6             2015 July                           27
-## # … with 119,384 more rows, and 2 more variables:
-## #   arrival_date_day_of_month &lt;dbl&gt;, arrival_date &lt;date&gt;
+## # A tibble: 119,390 x 33
+##   arrival_date hotel is_canceled lead_time arrival_date_ye…
+##   &lt;date&gt;       &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;
+## 1 2015-07-01   Reso…           0       342             2015
+## 2 2015-07-01   Reso…           0       737             2015
+## 3 2015-07-01   Reso…           0         7             2015
+## 4 2015-07-01   Reso…           0        13             2015
+...
 ```
 ]
 
 ---
 
-## Step 2. Count number of bookings per date.
+## Step 2. Count bookings per date
 
 .midi[
 
@@ -552,7 +547,7 @@ hotels %&gt;%
 
 ---
 
-## Step 3a. Visualise number of bookings / date.
+## Step 3a. Visualise bookings per date
 
 .midi[
 
@@ -564,12 +559,12 @@ hotels %&gt;%
   geom_line()
 ```
 
-&lt;img src="w4-d03-data-classes_files/figure-html/unnamed-chunk-27-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w4-d03-data-classes_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-## Step 3b. Visualise using a smooth curve.
+## Step 3b. Visualise using a smooth curve
 
 .midi[
 
@@ -581,7 +576,7 @@ hotels %&gt;%
 * geom_smooth()
 ```
 
-&lt;img src="w4-d03-data-classes_files/figure-html/unnamed-chunk-28-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w4-d03-data-classes_files/figure-html/unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

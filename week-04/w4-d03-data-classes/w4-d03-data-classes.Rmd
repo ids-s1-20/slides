@@ -96,7 +96,7 @@ class(y)
 
 ## More on dates
 
-We can think of factors like an integer (the number of days since the origin, 1 Jan 1970) and an integer (the origin) glued together
+We can think of dates like an integer (the number of days since the origin, 1 Jan 1970) and an integer (the origin) glued together
 
 ```{r}
 as.integer(y)
@@ -218,8 +218,9 @@ knitr::include_graphics("img/forcats-part-of-tidyverse.png")
 .your-turn[
 ### .hand[Your turn!]
 
-- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 06 - Hotels + Data types` > `hotels-forcats.Rmd` > knit
-- Recreate the following. The x-axis first, then, as a stretch goal, the y-axis.
+- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 05 - Hotels + Data types` > `hotels-forcats.Rmd` > knit
+- Recreate the x-axis of the following plot. 
+- **Stertch goal:** Recreate the y-axis.
 ]
 ]
 
@@ -287,23 +288,23 @@ hotels %>%
 
 ---
 
-## Step 1. Put together dates
+## Step 1. Construct dates
 
 .midi[
-```{r}
+```{r output.lines=7}
 library(glue)
 
 hotels %>%
   mutate(
     arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}") #<<
     ) %>% 
-  select(starts_with("arrival_"))
+  relocate(arrival_date)
 ```
 ]
 
 ---
 
-## Step 2. Count number of bookings / date
+## Step 2. Count bookings per date
 
 .midi[
 ```{r}
@@ -315,10 +316,10 @@ hotels %>%
 
 ---
 
-## Step 3. Visualise number of bookings / date
+## Step 3. Visualise bookings per date
 
 .midi[
-```{r out.width="65%", fig.asp = 0.4}
+```{r out.width="80%", fig.asp = 0.4}
 hotels %>%
   mutate(arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) %>%
   count(arrival_date) %>%
@@ -336,7 +337,7 @@ Why does the plot start with August when we know our data start in July? And why
 ]
 
 .midi[
-```{r out.width="65%", echo=FALSE, fig.asp = 0.4}
+```{r out.width="80%", echo=FALSE, fig.asp = 0.4}
 hotels %>%
   mutate(arrival_date = glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) %>%
   count(arrival_date) %>%
@@ -348,23 +349,23 @@ hotels %>%
 
 ---
 
-## Step 1. `REVISED` Put together dates `as dates`.
+## Step 1. *REVISED* Construct dates "as dates"
 
 .midi[
-```{r}
+```{r output.lines=7}
 library(lubridate)
 
 hotels %>%
   mutate(
     arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}")) #<<
     ) %>% 
-  select(starts_with("arrival_"))
+  relocate(arrival_date)
 ```
 ]
 
 ---
 
-## Step 2. Count number of bookings per date.
+## Step 2. Count bookings per date
 
 .midi[
 ```{r}
@@ -376,10 +377,10 @@ hotels %>%
 
 ---
 
-## Step 3a. Visualise number of bookings / date.
+## Step 3a. Visualise bookings per date
 
 .midi[
-```{r out.width="65%", fig.asp = 0.4}
+```{r out.width="80%", fig.asp = 0.4}
 hotels %>%
   mutate(arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}"))) %>% 
   count(arrival_date) %>%
@@ -390,10 +391,10 @@ hotels %>%
 
 ---
 
-## Step 3b. Visualise using a smooth curve.
+## Step 3b. Visualise using a smooth curve
 
 .midi[
-```{r out.width="65%", fig.asp = 0.4, message = FALSE}
+```{r out.width="80%", fig.asp = 0.4, message = FALSE}
 hotels %>%
   mutate(arrival_date = ymd(glue("{arrival_date_year} {arrival_date_month} {arrival_date_day_of_month}"))) %>% 
   count(arrival_date) %>%
