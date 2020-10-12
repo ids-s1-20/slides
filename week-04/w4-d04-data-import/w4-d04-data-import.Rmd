@@ -181,7 +181,7 @@ class: middle
 ---
 
 .question[
-Which class is `x`? Why?
+Which type is `x`? Why?
 ]
 
 .pull-left[
@@ -190,8 +190,12 @@ knitr::include_graphics("img/df-na.png")
 ```
 ]
 .pull-right[
-```{r message=FALSE}
+```{r eval=FALSE}
 read_csv("data/df-na.csv")
+```
+
+```{r echo=FALSE}
+read_csv("data/df-na.csv") %>% print(n = 10)
 ```
 ]
 
@@ -210,10 +214,11 @@ knitr::include_graphics("img/df-na.png")
 ```
 ]
 .pull-right[
-```{r echo=FALSE,message=FALSE}
+```{r echo=FALSE,message=FALSE,}
 read_csv("data/df-na.csv", 
   na = c("", "NA", ".", "9999",
-         "Not applicable"))
+         "Not applicable")) %>% 
+  print(n = 10)
 ```
 ]
 
@@ -221,13 +226,18 @@ read_csv("data/df-na.csv",
 
 ## Option 2. Specify column types
 
-.midi[
-```{r}
+```{r eval=FALSE}
 read_csv("data/df-na.csv", col_types = list(col_double(), 
                                             col_character(), 
                                             col_character()))
 ```
-]
+
+```{r echo=FALSE}
+read_csv("data/df-na.csv", col_types = list(col_double(), 
+                                            col_character(), 
+                                            col_character())) %>%
+  print(n = 10)
+```
 
 ---
 
@@ -404,7 +414,7 @@ fav_food_clean <- read_csv("data/fav-food-clean.csv")
 What happened to `ses` again?
 ]
 
-```{r, highlight.output=3}
+```{r}
 fav_food_clean %>%
   count(ses)
 ```
@@ -425,7 +435,7 @@ write_rds(x, path)
 
 ## Out and back in, take 2
 
-```{r, highlight.output=3}
+```{r}
 write_rds(fav_food, file = "data/fav-food-clean.rds")
 
 fav_food_clean <- read_rds("data/fav-food-clean.rds")
@@ -461,13 +471,13 @@ class: middle
 - RStudio Cloud > `AE 06 - Nobels and sales + Data import` > `sales-excel.Rmd`. 
 - Load the `sales.xlsx` file from the `data-raw/` folder, using appropriate arguments for the `read_excel()` function such that it looks like the output on the left.
 - **Stretch goal:** Manipulate the sales data such that it looks like the output on the right.
-]]
+]
+]
 
 .pull-left[
 ```{r echo=FALSE}
 sales <- read_excel("data/sales.xlsx", skip = 3, col_names = c("id", "n"))
-sales %>%
-  print(n = 9)
+sales
 ```
 ]
 .pull-right[
@@ -483,7 +493,6 @@ sales %>%
   mutate(
     id = as.numeric(id),
     n = as.numeric(n)
-  ) %>%
-  print(n = 7)
+  )
 ```
 ]

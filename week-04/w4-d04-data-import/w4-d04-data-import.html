@@ -259,7 +259,7 @@ class: middle
 ---
 
 .question[
-Which class is `x`? Why?
+Which type is `x`? Why?
 ]
 
 .pull-left[
@@ -271,6 +271,7 @@ Which class is `x`? Why?
 read_csv("data/df-na.csv")
 ```
 
+
 ```
 ## # A tibble: 9 x 3
 ##   x     y              z     
@@ -281,7 +282,9 @@ read_csv("data/df-na.csv")
 ## 4 4     d              ola   
 ## 5 5     e              hola  
 ## 6 .     f              whatup
-## # … with 3 more rows
+## 7 7     g              wassup
+## 8 8     h              sup   
+## 9 9     i              &lt;NA&gt;
 ```
 ]
 
@@ -310,7 +313,9 @@ read_csv("data/df-na.csv",
 ## 4     4 d     ola   
 ## 5     5 e     hola  
 ## 6    NA f     whatup
-## # … with 3 more rows
+## 7     7 g     wassup
+## 8     8 h     sup   
+## 9     9 i     &lt;NA&gt;
 ```
 ]
 
@@ -318,13 +323,13 @@ read_csv("data/df-na.csv",
 
 ## Option 2. Specify column types
 
-.midi[
 
 ```r
 read_csv("data/df-na.csv", col_types = list(col_double(), 
                                             col_character(), 
                                             col_character()))
 ```
+
 
 ```
 ## Warning: 1 parsing failure.
@@ -342,9 +347,10 @@ read_csv("data/df-na.csv", col_types = list(col_double(),
 ## 4     4 d              ola   
 ## 5     5 e              hola  
 ## 6    NA f              whatup
-## # … with 3 more rows
+## 7     7 g              wassup
+## 8     8 h              sup   
+## 9     9 i              &lt;NA&gt;
 ```
-]
 
 ---
 
@@ -623,7 +629,7 @@ fav_food_clean %&gt;%
 ```
 ## # A tibble: 3 x 2
 ##   ses        n
-*##   &lt;chr&gt;  &lt;int&gt;
+##   &lt;chr&gt;  &lt;int&gt;
 ## 1 High       2
 ## 2 Low        1
 ## 3 Middle     2
@@ -659,7 +665,7 @@ fav_food_clean %&gt;%
 ```
 ## # A tibble: 3 x 2
 ##   ses        n
-*##   &lt;fct&gt;  &lt;int&gt;
+##   &lt;fct&gt;  &lt;int&gt;
 ## 1 Low        1
 ## 2 Middle     2
 ## 3 High       2
@@ -692,7 +698,8 @@ class: middle
 - RStudio Cloud &gt; `AE 06 - Nobels and sales + Data import` &gt; `sales-excel.Rmd`. 
 - Load the `sales.xlsx` file from the `data-raw/` folder, using appropriate arguments for the `read_excel()` function such that it looks like the output on the left.
 - **Stretch goal:** Manipulate the sales data such that it looks like the output on the right.
-]]
+]
+]
 
 .pull-left[
 
@@ -706,9 +713,7 @@ class: middle
 ## 4 1822    3    
 ## 5 Brand 2 n    
 ## 6 3333    1    
-## 7 2156    3    
-## 8 3987    6    
-## 9 3216    5
+## # … with 3 more rows
 ```
 ]
 .pull-right[
@@ -723,7 +728,7 @@ class: middle
 ## 4 Brand 2  3333     1
 ## 5 Brand 2  2156     3
 ## 6 Brand 2  3987     6
-## 7 Brand 2  3216     5
+## # … with 1 more row
 ```
 ]
     </textarea>
