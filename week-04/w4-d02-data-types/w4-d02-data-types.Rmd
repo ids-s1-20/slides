@@ -314,7 +314,7 @@ Let's give formal names to what we've seen so far:
 .your-turn[
 ### .hand[Your turn!]
 
-- RStudio Cloud > `AE 06 - Hotels + Data types` > open `type-coercion.Rmd` and knit.
+- RStudio Cloud > `AE 05 - Hotels + Data types` > open `type-coercion.Rmd` and knit.
 - What is the type of the given vectors? First, guess. Then, try it out in R. 
 If your guess was correct, great! If not, discuss why they have that type.
 ]
@@ -432,21 +432,22 @@ $\rightarrow$ See next slide for answers...
 
 .pull-left[
 .midi[
-- `TRUE` or `TRUE` is `TRUE` and `TRUE` or `FALSE` is also `TRUE`, and since both are `TRUE`
+- `TRUE | NA`
 ```{r}
-TRUE | TRUE
-FALSE | TRUE
+TRUE | TRUE  # if NA was TRUE
+TRUE | FALSE # if NA was FALSE
 ```
 ]
 ]
 .pull-right[
 .midi[
-- `FALSE` or `TRUE` is `TRUE` and `FALSE` or `FALSE` is also `FALSE`, so you you can't tell which should be the right answer
+- `FALSE | NA`
 ```{r}
-FALSE | TRUE
-FALSE | FALSE
+FALSE | TRUE  # if NA was TRUE
+FALSE | FALSE # if NA was FALSE
 ```
 ]
 ]
 
-- Doesn't make sense for mathematical operations but make sense in the context of missing data
+- Doesn't make sense for mathematical operations 
+- Makes sense in the context of missing data
