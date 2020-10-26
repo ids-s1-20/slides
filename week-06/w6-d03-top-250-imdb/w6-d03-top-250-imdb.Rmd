@@ -1,5 +1,5 @@
 ---
-title: "Web scraping"
+title: "Scraping top 250 movies on IMDB"
 subtitle: "<br><br> Introduction to Data Science"
 author: "[introds.org](https://introds.org/)"
 date: "<br> Dr. Mine Çetinkaya-Rundel"
@@ -26,143 +26,6 @@ library(DT)
 
 class: middle
 
-# Scraping the web
-
----
-
-## Scraping the web: what? why?
-
-- Increasing amount of data is available on the web
---
-
-- These data are provided in an unstructured format: you can always copy&paste, but it's time-consuming and prone to errors
-
---
-- Web scraping is the process of extracting this information automatically and transform it into a structured dataset
-
---
-- Two different scenarios:
-    - Screen scraping: extract data from source code of website, with html parser (easy) or regular expression matching (less easy).
-    - Web APIs (application programming interface): website offers a set of structured http requests that return JSON or XML files.
-
----
-
-class: middle
-
-# Web Scraping with rvest
-
----
-
-## Hypertext Markup Language
-
-- Most of the data on the web is still largely available as HTML 
-- It is structured (hierarchical / tree based), but it''s often not available in a form useful for analysis (flat / tidy).
-
-```html
-<html>
-  <head>
-    <title>This is a title</title>
-  </head>
-  <body>
-    <p align="center">Hello world!</p>
-  </body>
-</html>
-```
-
----
-
-## rvest
-
-.pull-left[
-- The **rvest** package makes basic processing and manipulation of HTML data straight forward
-- It's designed to work with pipelines built with `%>%`
-]
-.pull-right[
-```{r echo=FALSE,out.width=230,fig.align="right"}
-knitr::include_graphics("img/rvest.png")
-```
-]
-
----
-
-## Core rvest functions
-
-- `read_html`   - Read HTML data from a url or character string
-- `html_node `  - Select a specified node from HTML document
-- `html_nodes`  - Select specified nodes from HTML document
-- `html_table`  - Parse an HTML table into a data frame
-- `html_text`   - Extract tag pairs' content
-- `html_name`   - Extract tags' names
-- `html_attrs`  - Extract all of each tag's attributes
-- `html_attr`   - Extract tags' attribute value by name
-
----
-
-## SelectorGadget
-
-.pull-left-narrow[
-- Open source tool that eases CSS selector generation and discovery
-- Easiest to use with the [Chrome Extension](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb) 
-- Find out more on the [SelectorGadget vignette](https://cran.r-project.org/web/packages/rvest/vignettes/selectorgadget.html)
-]
-.pull-right-wide[
-```{r echo=FALSE, out.width="75%"}
-knitr::include_graphics("img/selector-gadget/selector-gadget.png")
-```
-]
-
----
-
-## Using the SelectorGadget
-
-```{r echo=FALSE, out.width="80%"}
-knitr::include_graphics("img/selector-gadget/selector-gadget.gif")
-```
-
----
-
-```{r echo=FALSE, out.width="95%"}
-knitr::include_graphics("img/selector-gadget/selector-gadget-1.png")
-```
-
----
-
-```{r echo=FALSE, out.width="95%"}
-knitr::include_graphics("img/selector-gadget/selector-gadget-2.png")
-```
-
----
-
-```{r echo=FALSE, out.width="95%"}
-knitr::include_graphics("img/selector-gadget/selector-gadget-3.png")
-```
-
----
-
-```{r echo=FALSE, out.width="95%"}
-knitr::include_graphics("img/selector-gadget/selector-gadget-4.png")
-```
-
----
-
-```{r echo=FALSE, out.width="95%"}
-knitr::include_graphics("img/selector-gadget/selector-gadget-5.png")
-```
-
----
-
-## Using the SelectorGadget
-
-Through this process of selection and rejection, SelectorGadget helps you come up with the appropriate CSS selector for your needs
-
-```{r echo=FALSE, out.width="65%"}
-knitr::include_graphics("img/selector-gadget/selector-gadget.gif")
-```
-
----
-
-class: middle
-
 # Top 250 movies on IMDB
 
 ---
@@ -175,12 +38,12 @@ http://www.imdb.com/chart/top
 
 .pull-left[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/imdb-top-250.png")
+knitr::include_graphics("img/imdb-top-250.png")
 ```
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="94%"}
-knitr::include_graphics("img/imdb-top-250/imdb-top-250-source.png")
+knitr::include_graphics("img/imdb-top-250-source.png")
 ```
 ]
 
@@ -205,7 +68,7 @@ paths_allowed("http://www.facebook.com")
 ## Plan
 
 ```{r echo=FALSE, out.width="90%"}
-knitr::include_graphics("img/imdb-top-250/plan.png")
+knitr::include_graphics("img/plan.png")
 ```
 
 ---
@@ -266,7 +129,7 @@ class: middle
 ## Scrape movie titles
 
 ```{r echo=FALSE, out.width="70%"}
-knitr::include_graphics("img/imdb-top-250/titles.png")
+knitr::include_graphics("img/titles.png")
 ```
 
 ---
@@ -281,7 +144,7 @@ page %>%
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/titles.png")
+knitr::include_graphics("img/titles.png")
 ```
 ]
 
@@ -298,7 +161,7 @@ page %>%
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/titles.png")
+knitr::include_graphics("img/titles.png")
 ```
 ]
 
@@ -317,7 +180,7 @@ titles
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/titles.png")
+knitr::include_graphics("img/titles.png")
 ```
 ]
 
@@ -332,7 +195,7 @@ class: middle
 ## Scrape years movies were made in
 
 ```{r echo=FALSE, out.width="70%"}
-knitr::include_graphics("img/imdb-top-250/years.png")
+knitr::include_graphics("img/years.png")
 ```
 
 ---
@@ -347,7 +210,7 @@ page %>%
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/years.png")
+knitr::include_graphics("img/years.png")
 ```
 ]
 
@@ -364,7 +227,7 @@ page %>%
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/years.png")
+knitr::include_graphics("img/years.png")
 ```
 ]
 
@@ -454,16 +317,8 @@ years
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/years.png")
+knitr::include_graphics("img/years.png")
 ```
-]
-
----
-
-.your-turn[
-- [RStudio Cloud](http://rstd.io/dsbox-cloud) > `AE 08 - IMDB + Webscraping`.
-- Open `01-imdb-250movies.R`.
-- Follow along, and fill in the blanks as we go based on upcoming slides.
 ]
 
 ---
@@ -477,7 +332,7 @@ class: middle
 ## Scrape IMDB ratings
 
 ```{r echo=FALSE, out.width="70%"}
-knitr::include_graphics("img/imdb-top-250/ratings.png")
+knitr::include_graphics("img/ratings.png")
 ```
 
 ---
@@ -492,7 +347,7 @@ page %>%
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/ratings.png")
+knitr::include_graphics("img/ratings.png")
 ```
 ]
 
@@ -509,7 +364,7 @@ page %>%
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/ratings.png")
+knitr::include_graphics("img/ratings.png")
 ```
 ]
 
@@ -527,7 +382,7 @@ page %>%
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/ratings.png")
+knitr::include_graphics("img/ratings.png")
 ```
 ]
 
@@ -547,7 +402,7 @@ ratings
 ]
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/imdb-top-250/ratings.png")
+knitr::include_graphics("img/ratings.png")
 ```
 ]
 
@@ -565,7 +420,7 @@ class: middle
 imdb_top_250 <- tibble(
   title = titles, 
   year = years, 
-  score = scores
+  rating = ratings
   )
 
 imdb_top_250
@@ -592,7 +447,8 @@ glimpse(imdb_top_250)
 - Add a variable for rank
 ```{r}
 imdb_top_250 <- imdb_top_250 %>%
-  mutate(rank = 1:nrow(imdb_top_250))
+  mutate(rank = 1:nrow(imdb_top_250)) %>%
+  relocate(rank)
 ```
 
 ---
@@ -611,19 +467,6 @@ class: middle
 ---
 
 .question[
-Which 1995 movies made the list?
-]
-
---
-
-```{r}
-imdb_top_250 %>% 
-  filter(year == 1995)
-```
-
----
-
-.question[
 Which years have the most movies on the list?
 ]
 
@@ -637,7 +480,21 @@ imdb_top_250 %>%
 ---
 
 .question[
-Visualize the average yearly score for movies that made it on the top 250 list over time.
+Which 1995 movies made the list?
+]
+
+--
+
+```{r}
+imdb_top_250 %>% 
+  filter(year == 1995) %>%
+  print(n = 8)
+```
+
+---
+
+.question[
+Visualize the average yearly rating for movies that made it on the top 250 list over time.
 ]
 
 --
@@ -652,7 +509,7 @@ Visualize the average yearly score for movies that made it on the top 250 list o
 ```{r yearly-avg, fig.show = "hide"}
 imdb_top_250 %>% 
   group_by(year) %>%
-  summarise(avg_score = mean(score)) %>%
+  summarise(avg_score = mean(rating)) %>%
   ggplot(aes(y = avg_score, x = year)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
@@ -660,25 +517,3 @@ imdb_top_250 %>%
 ```
 ]
 ]
-
----
-
-class: middle
-
-#Web scraping challenges
-
----
-
-## Unreliable formatting at the source
-
-```{r echo=FALSE, out.width="70%"}
-knitr::include_graphics("img/challenges/unreliable-formatting.png")
-```
-
----
-
-## Data broken into many pages
-
-```{r echo=FALSE, out.width="70%"}
-knitr::include_graphics("img/challenges/many-pages.png")
-```
