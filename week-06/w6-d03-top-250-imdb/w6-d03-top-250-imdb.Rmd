@@ -271,7 +271,7 @@ knitr::include_graphics("img/stringr.png")
 page %>%
   html_nodes(".secondaryInfo") %>%
   html_text() %>%
-  str_replace("\\(", "") # remove (
+  str_remove("\\(") # remove (
 ```
 
 ---
@@ -282,8 +282,8 @@ page %>%
 page %>%
   html_nodes(".secondaryInfo") %>%
   html_text() %>%
-  str_replace("\\(", "") %>% # remove (
-  str_replace("\\)", "")
+  str_remove("\\(") %>% # remove (
+  str_remove("\\)") # remove )
 ```
 
 ---
@@ -294,8 +294,8 @@ page %>%
 page %>%
   html_nodes(".secondaryInfo") %>%
   html_text() %>%
-  str_replace("\\(", "") %>% # remove (
-  str_replace("\\)", "") %>% # remove )
+  str_remove("\\(") %>% # remove (
+  str_remove("\\)") %>% # remove )
   as.numeric()
 ```
 
@@ -308,8 +308,8 @@ page %>%
 years <- page %>%
   html_nodes(".secondaryInfo") %>%
   html_text() %>%
-  str_replace("\\(", "") %>% # remove (
-  str_replace("\\)", "") %>% # remove )
+  str_remove("\\(") %>% # remove (
+  str_remove("\\)") %>% # remove )
   as.numeric()
 
 years
