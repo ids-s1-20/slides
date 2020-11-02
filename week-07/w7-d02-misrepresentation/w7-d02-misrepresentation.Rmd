@@ -151,9 +151,11 @@ knitr::include_graphics("img/ga-dph-declining-bars.jpg")
 
 ---
 
-```{r echo=FALSE, out.width = "80%", fig.align= "center"}
-knitr::include_url("https://livefreeordichotomize.com/2020/05/17/graph-detective/", height = "550px")
-```
+## Graph detective
+
+.center[
+<iframe width="900" height="450" src="https://livefreeordichotomize.com/2020/05/17/graph-detective/" frameborder="0"></iframe>  
+]
 
 .footnote[
 .midi[

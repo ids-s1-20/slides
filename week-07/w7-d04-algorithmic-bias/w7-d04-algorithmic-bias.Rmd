@@ -164,20 +164,16 @@ knitr::include_graphics("img/propublica-results.png")
 
 ---
 
-## How to make a racist AI without trying
+## How to write a racist AI without trying
 
-```{r echo=FALSE, out.width="55%"}
-knitr::include_graphics("img/racist_ai_r-1.png")
-```
-
-
-```{r echo=FALSE, out.width="55%"}
-knitr::include_graphics("img/racist_ai_r-2.png")
-```
+.center[
+<iframe width="900" height="450" src="https://notstatschat.rbind.io/2018/09/27/how-to-write-a-racist-ai-in-r-without-really-trying/" frameborder="0" style="background:white;"></iframe>  
+]
 
 .footnote[
 .midi[
-Thomas Lumley. [How to write a racist AI in R without really trying](https://notstatschat.rbind.io/2018/09/27/how-to-write-a-racist-ai-in-r-without-really-trying/). Biased and Inefficient. 27 September 2018.
+Thomas Lumley. [How to write a racist AI in R without really trying](https://notstatschat.rbind.io/2018/09/27/how-to-write-a-racist-ai-in-r-without-really-trying/).  
+Biased and Inefficient. 27 September 2018.
 ]
 ]
 
@@ -261,6 +257,10 @@ How do you train yourself to make the right decisions (or reduce the likelihood 
 
 .center[
 <iframe width="800" height="450" src="https://www.youtube.com/embed/fgf2VjnhpCs?start=1162" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
-AI for Good in the R and Python ecosystems  
-by Julien Cornebise
+]
+
+.footnote[
+.midi[
+Julien Cornebise. AI for Good in the R and Python ecosystems. useR 2019.
+]
 ]
