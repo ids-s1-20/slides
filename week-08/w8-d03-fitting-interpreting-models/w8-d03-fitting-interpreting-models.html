@@ -115,7 +115,7 @@ linear_reg() %&gt;%
 ```
 ## parsnip model object
 ## 
-## Fit time:  25ms 
+## Fit time:  28ms 
 ## 
 ## Call:
 ## stats::lm(formula = Height_in ~ Width_in, data = data)
@@ -133,7 +133,7 @@ linear_reg() %&gt;%
 ```
 ## parsnip model object
 ## 
-## Fit time:  3ms 
+## Fit time:  1ms 
 ## 
 ## Call:
 ## stats::lm(formula = Height_in ~ Width_in, data = data)
@@ -227,7 +227,7 @@ class: middle
 - The regression line minimizes the sum of squared residuals.
 
 --
-- If `\(e_i = y - \hat{y}\)`, then, the regression line minimizes 
+- If `\(e_i = y_i - \hat{y}_i\)`, then, the regression line minimizes 
 `\(\sum_{i = 1}^n e_i^2\)`.
 
 ---
@@ -254,7 +254,7 @@ class: middle
 
 - The regression line goes through the center of mass point, the coordinates corresponding to average `\(x\)` and average `\(y\)`, `\((\bar{x}, \bar{y})\)`:  
 
-`$$\hat{y} = b_0 + b_1 x ~ \rightarrow ~ b_0 = \hat{y} - b_1 x$$`
+`$$\bar{y} = b_0 + b_1 \bar{x} ~ \rightarrow ~ b_0 = \bar{y} - b_1 \bar{x}$$`
 
 --
 - The slope has the same sign as the correlation coefficient: `\(b_1 = r \frac{s_y}{s_x}\)`
