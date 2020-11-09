@@ -209,11 +209,7 @@ ggplot(data = pp, aes(x = Width_in)) +
 - We can represent relationships between variables using **functions**
 - A function is a mathematical concept: the relationship between an output and one or more inputs
   - Plug in the inputs and receive back the output
-  - Example: The formula $y = 3x + 7$ is a function with input $x$ and output $y$. If $x$ is $5$, $y$ is $22$.
-  
-  ```
-  y = 3 * 5 + 7 = 22
-  ```
+  - Example: The formula $y = 3x + 7$ is a function with input $x$ and output $y$. If $x$ is $5$, $y$ is $22$, $y = 3 \times 5 + 7 = 22$
 
 ---
 
@@ -392,7 +388,9 @@ ggplot(data = ht_wt_fit_aug) +
     y = "Height (inches)"
   ) +
   guides(color = FALSE) +
-  scale_color_manual(values = c("#260b27", "#e6b0e7"))
+  scale_color_manual(values = c("#260b27", "#e6b0e7")) +
+  geom_text(aes(x = 0, y = 150), label = "Positive residual", color = "#e6b0e7", hjust = 0, size = 8) +
+  geom_text(aes(x = 150, y = 25), label = "Negative residual", color = "#260b27", hjust = 0, size = 8)
 ```
 ]
 ]
@@ -448,7 +446,6 @@ How, if at all, does the relationship between width and height of paintings vary
 ]
 ]
 .panel[.panel-name[Code]
-.small[
 ```{r height-width-landscape, fig.show="hide", warning=FALSE}
 ggplot(data = pp, aes(x = Width_in, y = Height_in, color = factor(landsALL))) +
   geom_point(alpha = 0.4) +
@@ -462,7 +459,6 @@ ggplot(data = pp, aes(x = Width_in, y = Height_in, color = factor(landsALL))) +
   ) +
   scale_color_manual(values = c("#E48957", "#071381"))
 ```
-]
 ]
 ]
 

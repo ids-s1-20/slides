@@ -51,10 +51,10 @@ class: middle
 - For now we will focus on **linear** models (but remember there are *many* *many* other types of models too!)
 
 .pull-left[
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -145,27 +145,27 @@ pp %&gt;%
 ```
 ## Rows: 1
 ## Columns: 61
-## $ name              [3m[90m&lt;chr&gt;[39m[23m "R1777-89a"
-## $ sale              [3m[90m&lt;chr&gt;[39m[23m "R1777"
-## $ lot               [3m[90m&lt;chr&gt;[39m[23m "89"
-## $ position          [3m[90m&lt;dbl&gt;[39m[23m 0.3755274
-## $ dealer            [3m[90m&lt;chr&gt;[39m[23m "R"
-## $ year              [3m[90m&lt;dbl&gt;[39m[23m 1777
-## $ origin_author     [3m[90m&lt;chr&gt;[39m[23m "D/FL"
-## $ origin_cat        [3m[90m&lt;chr&gt;[39m[23m "D/FL"
-## $ school_pntg       [3m[90m&lt;chr&gt;[39m[23m "D/FL"
-## $ diff_origin       [3m[90m&lt;dbl&gt;[39m[23m 0
-## $ logprice          [3m[90m&lt;dbl&gt;[39m[23m 8.575462
-## $ price             [3m[90m&lt;dbl&gt;[39m[23m 5300
-## $ count             [3m[90m&lt;dbl&gt;[39m[23m 1
-## $ subject           [3m[90m&lt;chr&gt;[39m[23m "D\u008epart pour la chasse"
-## $ authorstandard    [3m[90m&lt;chr&gt;[39m[23m "Wouwerman, Philips"
-## $ artistliving      [3m[90m&lt;dbl&gt;[39m[23m 0
-## $ authorstyle       [3m[90m&lt;chr&gt;[39m[23m NA
-## $ author            [3m[90m&lt;chr&gt;[39m[23m "Philippe Wouwermans"
-## $ winningbidder     [3m[90m&lt;chr&gt;[39m[23m "Langlier, Jacques for Poullain, Ant…
-## $ winningbiddertype [3m[90m&lt;chr&gt;[39m[23m "DC"
-## $ endbuyer          [3m[90m&lt;chr&gt;[39m[23m "C"
+## $ name              &lt;chr&gt; "R1777-89a"
+## $ sale              &lt;chr&gt; "R1777"
+## $ lot               &lt;chr&gt; "89"
+## $ position          &lt;dbl&gt; 0.3755274
+## $ dealer            &lt;chr&gt; "R"
+## $ year              &lt;dbl&gt; 1777
+## $ origin_author     &lt;chr&gt; "D/FL"
+## $ origin_cat        &lt;chr&gt; "D/FL"
+## $ school_pntg       &lt;chr&gt; "D/FL"
+## $ diff_origin       &lt;dbl&gt; 0
+## $ logprice          &lt;dbl&gt; 8.575462
+## $ price             &lt;dbl&gt; 5300
+## $ count             &lt;dbl&gt; 1
+## $ subject           &lt;chr&gt; "D\u008epart pour la chasse"
+## $ authorstandard    &lt;chr&gt; "Wouwerman, Philips"
+## $ artistliving      &lt;dbl&gt; 0
+## $ authorstyle       &lt;chr&gt; NA
+## $ author            &lt;chr&gt; "Philippe Wouwermans"
+## $ winningbidder     &lt;chr&gt; "Langlier, Jacques for Poullain, Ant…
+## $ winningbiddertype &lt;chr&gt; "DC"
+## $ endbuyer          &lt;chr&gt; "C"
 ...
 ```
 ]
@@ -173,27 +173,27 @@ pp %&gt;%
 
 ```
 ...
-## $ Interm            [3m[90m&lt;dbl&gt;[39m[23m 1
-## $ type_intermed     [3m[90m&lt;chr&gt;[39m[23m "D"
-## $ Height_in         [3m[90m&lt;dbl&gt;[39m[23m 17.25
-## $ Width_in          [3m[90m&lt;dbl&gt;[39m[23m 23
-## $ Surface_Rect      [3m[90m&lt;dbl&gt;[39m[23m 396.75
-## $ Diam_in           [3m[90m&lt;dbl&gt;[39m[23m NA
-## $ Surface_Rnd       [3m[90m&lt;dbl&gt;[39m[23m NA
-## $ Shape             [3m[90m&lt;chr&gt;[39m[23m "squ_rect"
-## $ Surface           [3m[90m&lt;dbl&gt;[39m[23m 396.75
-## $ material          [3m[90m&lt;chr&gt;[39m[23m "bois"
-## $ mat               [3m[90m&lt;chr&gt;[39m[23m "b"
-## $ materialCat       [3m[90m&lt;chr&gt;[39m[23m "wood"
-## $ quantity          [3m[90m&lt;dbl&gt;[39m[23m 1
-## $ nfigures          [3m[90m&lt;dbl&gt;[39m[23m 0
-## $ engraved          [3m[90m&lt;dbl&gt;[39m[23m 0
-## $ original          [3m[90m&lt;dbl&gt;[39m[23m 0
-## $ prevcoll          [3m[90m&lt;dbl&gt;[39m[23m 1
-## $ othartist         [3m[90m&lt;dbl&gt;[39m[23m 0
-## $ paired            [3m[90m&lt;dbl&gt;[39m[23m 1
-## $ figures           [3m[90m&lt;dbl&gt;[39m[23m 0
-## $ finished          [3m[90m&lt;dbl&gt;[39m[23m 0
+## $ Interm            &lt;dbl&gt; 1
+## $ type_intermed     &lt;chr&gt; "D"
+## $ Height_in         &lt;dbl&gt; 17.25
+## $ Width_in          &lt;dbl&gt; 23
+## $ Surface_Rect      &lt;dbl&gt; 396.75
+## $ Diam_in           &lt;dbl&gt; NA
+## $ Surface_Rnd       &lt;dbl&gt; NA
+## $ Shape             &lt;chr&gt; "squ_rect"
+## $ Surface           &lt;dbl&gt; 396.75
+## $ material          &lt;chr&gt; "bois"
+## $ mat               &lt;chr&gt; "b"
+## $ materialCat       &lt;chr&gt; "wood"
+## $ quantity          &lt;dbl&gt; 1
+## $ nfigures          &lt;dbl&gt; 0
+## $ engraved          &lt;dbl&gt; 0
+## $ original          &lt;dbl&gt; 0
+## $ prevcoll          &lt;dbl&gt; 1
+## $ othartist         &lt;dbl&gt; 0
+## $ paired            &lt;dbl&gt; 1
+## $ figures           &lt;dbl&gt; 0
+## $ finished          &lt;dbl&gt; 0
 ...
 ```
 ]
@@ -218,7 +218,7 @@ ggplot(data = pp, aes(x = Height_in)) +
   labs(x = "Height, in inches", y = NULL)
 ```
 
-&lt;img src="w8-d01-language-of-models_files/figure-html/height-dist-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/height-dist-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -233,7 +233,7 @@ ggplot(data = pp, aes(x = Width_in)) +
   labs(x = "Width, in inches", y = NULL)
 ```
 
-&lt;img src="w8-d01-language-of-models_files/figure-html/width-dist-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/width-dist-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -243,11 +243,7 @@ ggplot(data = pp, aes(x = Width_in)) +
 - We can represent relationships between variables using **functions**
 - A function is a mathematical concept: the relationship between an output and one or more inputs
   - Plug in the inputs and receive back the output
-  - Example: The formula `\(y = 3x + 7\)` is a function with input `\(x\)` and output `\(y\)`. If `\(x\)` is `\(5\)`, `\(y\)` is `\(22\)`.
-  
-  ```
-  y = 3 * 5 + 7 = 22
-  ```
+  - Example: The formula `\(y = 3x + 7\)` is a function with input `\(x\)` and output `\(y\)`. If `\(x\)` is `\(5\)`, `\(y\)` is `\(22\)`, `\(y = 3 \times 5 + 7 = 22\)`
 
 ---
 
@@ -255,7 +251,7 @@ ggplot(data = pp, aes(x = Width_in)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
@@ -289,7 +285,7 @@ ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
@@ -315,7 +311,7 @@ ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
@@ -341,7 +337,7 @@ ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
@@ -367,7 +363,7 @@ ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
@@ -411,7 +407,7 @@ ggplot(data = pp, aes(x = Width_in, y = Height_in)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-18-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-18-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 .small[
@@ -435,7 +431,9 @@ ggplot(data = ht_wt_fit_aug) +
     y = "Height (inches)"
   ) +
   guides(color = FALSE) +
-  scale_color_manual(values = c("#260b27", "#e6b0e7"))
+  scale_color_manual(values = c("#260b27", "#e6b0e7")) +
+  geom_text(aes(x = 0, y = 150), label = "Positive residual", color = "#e6b0e7", hjust = 0, size = 8) +
+  geom_text(aes(x = 150, y = 25), label = "Negative residual", color = "#260b27", hjust = 0, size = 8)
 ```
 ]
 ]
@@ -447,7 +445,7 @@ ggplot(data = ht_wt_fit_aug) +
 The plot below displays the relationship between height and width of paintings. The only difference from the previous plots is that it uses a smaller alpha value, making the points somewhat transparent. What feature is apparent in this plot that was not (as) apparent in the previous plots? What might be the reason for this feature?
 ]
 
-&lt;img src="w8-d01-language-of-models_files/figure-html/height-width-plot-alpha-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/height-width-plot-alpha-1.png" width="55%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -477,11 +475,10 @@ How, if at all, does the relationship between width and height of paintings vary
 ]
 ]
 .pull-right-wide[
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 ]
 .panel[.panel-name[Code]
-.small[
 
 ```r
 ggplot(data = pp, aes(x = Width_in, y = Height_in, color = factor(landsALL))) +
@@ -498,7 +495,6 @@ ggplot(data = pp, aes(x = Width_in, y = Height_in, color = factor(landsALL))) +
 ```
 ]
 ]
-]
 
 ---
 
@@ -506,7 +502,7 @@ ggplot(data = pp, aes(x = Width_in, y = Height_in, color = factor(landsALL))) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="w8-d01-language-of-models_files/figure-html/unnamed-chunk-20-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w8-d02-language-of-models_files/figure-html/unnamed-chunk-20-1.png" width="65%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
