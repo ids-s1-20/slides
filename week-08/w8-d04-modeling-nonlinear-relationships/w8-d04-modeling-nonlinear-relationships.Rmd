@@ -41,7 +41,7 @@ pp <- read_csv("data/paris-paintings.csv", na = c("n/a", "", "NA"))
 ```
 
 - Number of observations: `r nrow(pp)`
-- Number of variables: `r nrow(pp)`
+- Number of variables: `r ncol(pp)`
 
 ---
 
@@ -60,7 +60,6 @@ pp <- read_csv("data/paris-paintings.csv", na = c("n/a", "", "NA"))
 ```
 ]
 .panel[.panel-name[Code]
-
 ```{r residuals-plot, fig.show="hide"}
 ht_wt_fit <- linear_reg() %>%
   set_engine("lm") %>%
@@ -72,6 +71,12 @@ ggplot(ht_wt_fit_aug, mapping = aes(x = .fitted, y = .resid)) +
   geom_point(alpha = 0.5) +
   geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
   labs(x = "Predicted height", y = "Residuals")
+```
+]
+
+.panel[.panel-name[Augment]
+```{r}
+ht_wt_fit_aug
 ```
 ]
 ]
@@ -439,43 +444,6 @@ $$ \frac{\text{price for width x+1}}{\text{price for width x}} \approx 1.02 $$
 --
 
 For each additional inch the painting is wider, the price of the painting is expected to be higher, on average, by a factor of 1.02.
-
-
----
-
-## Interpreting the intercept
-
-.question[
-What is the interpretation of the intercept for the logged model?
-]
-
-```{r}
-tidy(lprice_wt_fit)
-```
-
----
-
-## Using R
-
-.pull-left[
-**Original model:**
-
-```{r}
-price_wt_fit %>%
-  tidy() %>%
-  select(term, estimate)
-```
-]
-.pull-right[
-**Logged model:**
-
-```{r}
-lprice_wt_fit %>%
-  tidy() %>%
-  mutate(estimate_exp = exp(estimate)) %>%
-  select(term, estimate, estimate_exp)
-```
-]
 
 ---
 
