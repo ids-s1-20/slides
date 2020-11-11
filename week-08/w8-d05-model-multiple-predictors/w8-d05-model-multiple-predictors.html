@@ -215,7 +215,7 @@ the regression model.
 
 
 ```r
-glance(book_fit_main)$r.squared
+glance(book_main_fit)$r.squared
 ```
 
 ```
@@ -223,7 +223,7 @@ glance(book_fit_main)$r.squared
 ```
 
 ```r
-glance(book_fit_int)$r.squared
+glance(book_int_fit)$r.squared
 ```
 
 ```
@@ -255,7 +255,7 @@ regression models.
 .pull-left[
 
 ```r
-glance(book_fit_main)$r.squared
+glance(book_main_fit)$r.squared
 ```
 
 ```
@@ -263,7 +263,7 @@ glance(book_fit_main)$r.squared
 ```
 
 ```r
-glance(book_fit_int)$r.squared
+glance(book_int_fit)$r.squared
 ```
 
 ```
@@ -273,7 +273,7 @@ glance(book_fit_int)$r.squared
 .pull-right[
 
 ```r
-glance(book_fit_main)$adj.r.squared
+glance(book_main_fit)$adj.r.squared
 ```
 
 ```
@@ -281,7 +281,7 @@ glance(book_fit_main)$adj.r.squared
 ```
 
 ```r
-glance(book_fit_int)$adj.r.squared
+glance(book_int_fit)$adj.r.squared
 ```
 
 ```
@@ -296,7 +296,7 @@ glance(book_fit_int)$adj.r.squared
 - Is R-sq higher for int model?
 
 ```r
-glance(book_fit_int)$r.squared &gt; glance(m_main)$r.squared 
+glance(book_int_fit)$r.squared &gt; glance(book_main_fit)$r.squared 
 ```
 
 ```
@@ -307,7 +307,7 @@ glance(book_fit_int)$r.squared &gt; glance(m_main)$r.squared
 
 
 ```r
-glance(book_fit_int)$adj.r.squared &gt; glance(m_main)$adj.r.squared
+glance(book_int_fit)$adj.r.squared &gt; glance(book_main_fit)$adj.r.squared
 ```
 
 ```

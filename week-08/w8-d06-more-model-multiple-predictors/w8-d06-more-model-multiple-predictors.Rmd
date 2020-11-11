@@ -84,9 +84,7 @@ p <- plot_ly(pp,
   plotly::layout(scene = list(
     xaxis = list(title = "Width (in)"),
     yaxis = list(title = "Height (in)"),
-    zaxis = list(title = "log_price"),
-    plot_bgcolor = "red",
-    paper_bgcolor = "red"
+    zaxis = list(title = "log_price")
   )) %>%
   config(displayModeBar = FALSE)
 frameWidget(p)
@@ -103,9 +101,7 @@ p <- plot_ly(pp,
   plotly::layout(scene = list(
     xaxis = list(title = "Width (in)"),
     yaxis = list(title = "Height (in)"),
-    zaxis = list(title = "log_price"),
-    plot_bgcolor = "red",
-    paper_bgcolor = "red"
+    zaxis = list(title = "log_price")
   )) %>%
   config(displayModeBar = FALSE)
 frameWidget(p)
@@ -157,6 +153,7 @@ Typical surface area appears to be less than 1000 square inches (~ 80cm x 80cm).
 ggplot(data = pp, aes(x = Surface, fill = artistliving)) +
   geom_histogram(binwidth = 500) + 
   facet_grid(artistliving ~ .) +
+  scale_fill_manual(values = c("#E48957", "#071381")) +
   guides(fill = FALSE) +
   labs(x = "Surface area", y = NULL) +
   geom_vline(xintercept = 1000) +
@@ -182,9 +179,10 @@ pp_Surf_lt_5000 <- pp %>%
   filter(Surface < 5000)
 
 ggplot(data = pp_Surf_lt_5000, 
-       aes(y = log_price, x = Surface, color = artistliving)) +
-  geom_point(alpha = 0.3) +
-  labs(color = "Living artist")
+       aes(y = log_price, x = Surface, color = artistliving, shape = artistliving)) +
+  geom_point(alpha = 0.5) +
+  labs(color = "Artist", shape = "Artist") +
+  scale_color_manual(values = c("#E48957", "#071381"))
 ```
 ]
 ]
@@ -201,10 +199,11 @@ ggplot(data = pp_Surf_lt_5000,
 .panel[.panel-name[Code]
 ```{r viz-surf-lt-5000-artistliving-facet, fig.show = "hide"}
 ggplot(data = pp_Surf_lt_5000, 
-       aes(y = log_price, x = Surface, color = artistliving)) +
-  geom_point(alpha = 0.3) +
+       aes(y = log_price, x = Surface, color = artistliving, shape = artistliving)) +
+  geom_point(alpha = 0.5) +
   facet_wrap(~artistliving) +
-  labs(color = "Living artist")
+  scale_color_manual(values = c("#E48957", "#071381")) +
+  labs(color = "Artist", shape = "Artist")
 ```
 ]
 ]
@@ -253,19 +252,21 @@ p_main <- ggplot(
   pp_main_fit_aug,
   aes(y = log_price, x = Surface, color = artistliving)
 ) +
-  geom_point(alpha = 0.3) +
+  geom_point(aes(shape = artistliving), alpha = 0.5) +
   scale_x_continuous(breaks = c(0, 2500, 5000)) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
   geom_line(aes(y = .fitted), size = 1.5) +
-  labs(y = "log_price", title = "Main effects", color = "Artist")
+  labs(y = "log_price", title = "Main effects", color = "Artist", shape = "Artist")
 
 p_int <- ggplot(
   pp_int_fit_aug,
   aes(y = log_price, x = Surface, color = artistliving)
 ) +
-  geom_point(alpha = 0.3) +
+  geom_point(aes(shape = artistliving), alpha = 0.5) +
   scale_x_continuous(breaks = c(0, 2500, 5000)) +
+  scale_color_manual(values = c("#E48957", "#071381")) +
   geom_line(aes(y = .fitted), size = 1.5) +
-  labs(y = "log_price", title = "Interaction effects", color = "Artist")
+  labs(y = "log_price", title = "Interaction effects", color = "Artist", shape = "Artist")
 
 p_main /
   p_int  + 
@@ -278,7 +279,7 @@ p_main /
 ## Fit model with main effects
 
 - Response variable: `log_price`
-- Explanatory variables: Surface area and artist living (0/1 variable)
+- Explanatory variables: `Surface` area and `artistliving`
 
 .midi[
 ```{r model-main-effects}
@@ -291,7 +292,7 @@ tidy(pp_main_fit)
 
 --
 
-$$ \widehat{log\_price} = 4.88 + 0.000265~surface + 0.137~artistliving $$
+$$\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times artistliving$$
 
 ---
 
@@ -299,14 +300,14 @@ $$ \widehat{log\_price} = 4.88 + 0.000265~surface + 0.137~artistliving $$
 
 - Non-living artist: Plug in 0 for `artistliving`
 
-$\widehat{log\_price} = 4.88 + 0.000265~surface + 0.137 \times 0$  
-$= 4.88 + 0.000265~surface$
+$\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times 0$  
+$= 4.88 + 0.000265 \times surface$
 
 --
 - Living artist: Plug in 1 for `artistliving`
 
-$\widehat{log\_price} = 4.88 + 0.000265~surface + 0.137 \times 1$   
-$= 5.017 + 0.000265~surface$
+$\widehat{log\_price} = 4.88 + 0.000265 \times surface + 0.137 \times 1$   
+$= 5.017 + 0.000265 \times surface$
 
 ---
 
@@ -342,21 +343,9 @@ tidy(pp_main_fit) %>%
 
 ---
 
-.pull-left-narrow[
-.question[
-Why is our linear regression model different from what we got from `geom_smooth(method = "lm")`?
-]
-]
-.pull-right-wide[
-```{r ref.label="pp-main-int-viz", echo = FALSE, out.width="70%", fig.asp = 0.9}
-```
-]
+## Main vs. interaction effects
 
----
-
-## What went ~~wrong~~ diferently?
-
-- The way we specified our model only lets `artistliving` affect the intercept.
+- The way we specified our main effects model only lets `artistliving` affect the intercept.
 - Model implicitly assumes that paintings with living and deceased artists have the *same slope* and only allows for *different intercepts*.  
 
 .question[
@@ -368,7 +357,7 @@ What seems more appropriate in this case?
 
 ---
 
-## Interaction: surface * artist living
+## Interaction: `Surface * artistliving`
 
 ```{r out.width="60%", echo = FALSE}
 p_int
@@ -379,8 +368,7 @@ p_int
 ## Fit model with interaction effects
 
 - Response variable: log_price
-- Explanatory variables: Surface area, artist living (0/1 variable), and 
-their interaction
+- Explanatory variables: `Surface` area, `artistliving`, and their interaction
 
 .midi[
 ```{r model-interaction-effects}
@@ -401,8 +389,8 @@ tidy(pp_int_fit)
 ```
 ]
 
-$$ \widehat{log\_price} = 4.91 + 0.00021~surface - 0.126~artistliving $$
-$$+ ~ 0.00048~surface \times artistliving $$
+$$\widehat{log\_price} = 4.91 + 0.00021 \times surface - 0.126 \times artistliving$$
+$$+ ~ 0.00048 \times surface * artistliving$$
 
 ---
 
@@ -416,15 +404,15 @@ non-living artists, and some are not (different intercept).
 .small[
 .pull-left[
 - Non-living artist: 
-$\widehat{log\_price} = 4.91 + 0.00021~surface$
-$- 0.126 \times 0 + 0.00048~surface \times 0$
-$= 4.91 + 0.00021~surface$
+$\widehat{log\_price} = 4.91 + 0.00021 \times surface$
+$- 0.126 \times 0 + 0.00048 \times surface \times 0$
+$= 4.91 + 0.00021 \times surface$
 - Living artist: 
-$\widehat{log\_price} = 4.91 + 0.00021~surface$
-$- 0.126 \times 1 + 0.00048~surface \times 1$
-$= 4.91 + 0.00021~surface$
-$- 0.126 + 0.00048~surface$
-$= 4.784 + 0.00069~surface$
+$\widehat{log\_price} = 4.91 + 0.00021 \times surface$
+$- 0.126 \times 1 + 0.00048 \times surface \times 1$
+$= 4.91 + 0.00021 \times surface$
+$- 0.126 + 0.00048 \times surface$
+$= 4.784 + 0.00069 \times surface$
 ]
 .pull-right[
 ```{r viz-interaction-effects2, out.width="80%", echo = FALSE}

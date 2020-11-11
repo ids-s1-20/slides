@@ -90,9 +90,10 @@ linear_reg() %>%
 ]
 .pull-right[
 ```{r out.width = "75%", echo = FALSE, fig.align = "right"}
-ggplot(allbacks, aes(x = volume, y = weight, color = cover)) +
+ggplot(allbacks, aes(x = volume, y = weight, color = cover, shape = cover)) +
   geom_point(alpha = 0.7, size = 3) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  scale_color_manual(values = c("#E48957", "#071381"))
 ```
 ]
 
@@ -135,31 +136,33 @@ increases would be different for hardback and paperback books.
 ---
 
 ```{r book-main-int, echo=FALSE, out.width="65%", fig.asp = 0.8}
-book_fit_main <- linear_reg() %>%
+book_main_fit <- linear_reg() %>%
   set_engine("lm") %>%
   fit(weight ~ volume + cover, data = allbacks)
-book_fit_main_aug <- augment(book_fit_main$fit)
+book_main_fit_aug <- augment(book_main_fit$fit)
 
-book_fit_int <- linear_reg() %>%
+book_int_fit <- linear_reg() %>%
   set_engine("lm") %>%
   fit(weight ~ volume + cover + volume*cover, data = allbacks)
-book_fit_int_aug <- augment(book_fit_int$fit)
+book_int_fit_aug <- augment(book_int_fit$fit)
 
 p_main <- ggplot() +
-  geom_point(allbacks, 
-             mapping = aes(x = volume, y = weight, color = cover), alpha = 0.7) +
-  geom_line(m_main_aug, 
+  geom_point(book_main_fit_aug, 
+             mapping = aes(x = volume, y = weight, color = cover, shape = cover), alpha = 0.7) +
+  geom_line(book_main_fit_aug, 
             mapping = aes(x = volume, y = .fitted, color = cover)) +
   labs(title = "Main effects, parallel slopes", 
-       subtitle = "weight-hat = volume + cover")
+       subtitle = "weight-hat = volume + cover") +
+  scale_color_manual(values = c("#E48957", "#071381"))
 
 p_int <- ggplot() +
-  geom_point(data = allbacks, 
-             mapping = aes(x = volume, y = weight, color = cover), alpha = 0.7) +
-  geom_line(data = m_int_aug, 
+  geom_point(book_int_fit_aug, 
+             mapping = aes(x = volume, y = weight, color = cover, shape = cover), alpha = 0.7) +
+  geom_line(book_int_fit_aug, 
             mapping = aes(x = volume, y = .fitted, color = cover)) +
   labs(title = "Interaction effects, not parallel slopes", 
-       subtitle = "weight-hat = volume + cover + volume * cover")
+       subtitle = "weight-hat = volume + cover + volume * cover") +
+  scale_color_manual(values = c("#E48957", "#071381"))
 
 p_main /
   p_int +
@@ -201,8 +204,8 @@ Visually, which of the two models is preferable under Occam's razor?
 the regression model.
 
 ```{r}
-glance(book_fit_main)$r.squared
-glance(book_fit_int)$r.squared
+glance(book_main_fit)$r.squared
+glance(book_int_fit)$r.squared
 ```
 
 --
@@ -229,14 +232,14 @@ regression models.
 
 .pull-left[
 ```{r}
-glance(book_fit_main)$r.squared
-glance(book_fit_int)$r.squared
+glance(book_main_fit)$r.squared
+glance(book_int_fit)$r.squared
 ```
 ]
 .pull-right[
 ```{r}
-glance(book_fit_main)$adj.r.squared
-glance(book_fit_int)$adj.r.squared
+glance(book_main_fit)$adj.r.squared
+glance(book_int_fit)$adj.r.squared
 ```
 ]
 
@@ -246,13 +249,13 @@ glance(book_fit_int)$adj.r.squared
 .small[
 - Is R-sq higher for int model?
 ```{r}
-glance(book_fit_int)$r.squared > glance(m_main)$r.squared 
+glance(book_int_fit)$r.squared > glance(book_main_fit)$r.squared 
 ```
 
 - Is R-sq adj. higher for int model?
 
 ```{r}
-glance(book_fit_int)$adj.r.squared > glance(m_main)$adj.r.squared
+glance(book_int_fit)$adj.r.squared > glance(book_main_fit)$adj.r.squared
 ```
 ]
 ]
