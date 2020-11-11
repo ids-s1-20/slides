@@ -9,9 +9,6 @@
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
-    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
-    <script src="libs/pymjs/pym.v1.js"></script>
-    <script src="libs/widgetframe-binding/widgetframe.js"></script>
     <link rel="stylesheet" href="../../xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="../../slides.css" type="text/css" />
   </head>
@@ -48,249 +45,17 @@ class: middle
 
 ---
 
-## The data
-
-
-```r
-pp &lt;- read_csv(
-  "data/paris-paintings.csv", 
-  na = c("n/a", "", "NA")
-  ) %&gt;%
-  mutate(log_price = log(price))
-```
-
----
-
-## Multiple predictors
-
-- Response variable: `log_price` 
-- Explanatory variables: Width and height
-
-
-```r
-m_wi_hgt &lt;- lm(log_price ~ Width_in + Height_in, data = pp)
-tidy(m_wi_hgt)
-```
-
-```
-## # A tibble: 3 x 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   4.77     0.0579      82.4  0.      
-## 2 Width_in      0.0269   0.00373      7.22 6.58e-13
-## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
-```
-
----
-
-##  Linear model with multiple predictors
-
-
-```
-## # A tibble: 3 x 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   4.77     0.0579      82.4  0.      
-## 2 Width_in      0.0269   0.00373      7.22 6.58e-13
-## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
-```
-
-&lt;br&gt;
-
-`$$\widehat{log\_price} = 4.77 + 0.0269 \times width - 0.0133 \times height$$`
-
----
-
-## Visualizing models with multiple predictors
-
-.panelset[
-.panel[.panel-name[Plot]
-.pull-left-wide[
-<div id="htmlwidget-09d5ccda67d1d69e4157" style="width:100%;height:1483.2px;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-09d5ccda67d1d69e4157">{"x":{"url":"w8-d05-model-multiple-predictors_files/figure-html//widgets/widget_plotly-plot.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
-]
-]
-.panel[.panel-name[Code]
-
-```r
-p &lt;- plot_ly(pp,
-  x = ~Width_in, y = ~Height_in, z = ~log_price,
-  marker = list(size = 3, color = "lightgray", alpha = 0.5, 
-                line = list(color = "gray", width = 2))) %&gt;%
-  add_markers() %&gt;%
-  plotly::layout(scene = list(
-    xaxis = list(title = "Width (in)"),
-    yaxis = list(title = "Height (in)"),
-    zaxis = list(title = "log_price"),
-    plot_bgcolor = "red",
-    paper_bgcolor = "red"
-  )) %&gt;%
-  config(displayModeBar = FALSE)
-frameWidget(p)
-```
-]
-]
-
----
-
-class: middle
-
-# Exploration: Price, surface area, and living artist
-
----
-
-## Price, surface area, and living artist
-
-- Explore the relationship between price of paintings and surface area, conditioned 
-on whether or not the artist is still living
-- First visualize and explore, then model
-- But first, prep the data
-
-.midi[
-
-```r
-pp &lt;- pp %&gt;%
-  mutate(artistliving = if_else(artistliving == 0, "Deceased", "Living"))
-
-pp %&gt;%
-  count(artistliving)
-```
-
-```
-## # A tibble: 2 x 2
-##   artistliving     n
-##   &lt;chr&gt;        &lt;int&gt;
-## 1 Deceased      2937
-## 2 Living         456
-```
-]
-
----
-
-## Typical surface area
-
-.panelset[
-.panel[.panel-name[Plot]
-.pull-left-narrow[
-Typical surface area appears to be less than 1000 square inches (~ 80cm x 80cm). There are very few paintings that have surface area above 5000 square inches.
-]
-.pull-right-wide[
-&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;" /&gt;
-]
-]
-.panel[.panel-name[Code]
-
-```r
-ggplot(data = pp, aes(x = Surface, fill = artistliving)) +
-  geom_histogram(binwidth = 500) + 
-  facet_grid(artistliving ~ .) +
-  guides(fill = FALSE) +
-  labs(x = "Surface area", y = NULL) +
-  geom_vline(xintercept = 1000) +
-  geom_vline(xintercept = 5000, linetype = "dashed", color = "gray")
-```
-
-```
-## Warning: Removed 176 rows containing non-finite values
-## (stat_bin).
-```
-]
-]
-
----
-
-## Narrowing the scope
-
-.panelset[
-.panel[.panel-name[Plot]
-For simplicity let's focus on the paintings with `Surface &lt; 5000`:
-
-&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-4-1.png" width="55%" style="display: block; margin: auto;" /&gt;
-]
-.panel[.panel-name[Code]
-
-```r
-pp_Surf_lt_5000 &lt;- pp %&gt;%
-  filter(Surface &lt; 5000)
-
-ggplot(data = pp_Surf_lt_5000, 
-       aes(y = log_price, x = Surface, color = artistliving)) +
-  geom_point(alpha = 0.3) +
-  labs(color = "Living artist")
-```
-]
-]
-
----
-
-## Facet to get a better look
-
-.panelset[
-.panel[.panel-name[Plot]
-&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-]
-.panel[.panel-name[Code]
-
-```r
-ggplot(data = pp_Surf_lt_5000, 
-       aes(y = log_price, x = Surface, color = artistliving)) +
-  geom_point(alpha = 0.3) +
-  facet_wrap(~artistliving) +
-  labs(color = "Living artist")
-```
-]
-]
-
----
-
-## Two ways to model
-
-- **Main effects:** Assuming relationship between surface and logged price 
-**does not vary** by whether or not the artist is living.
-- **Interaction effects:** Assuming relationship between surface and logged 
-price **varies** by whether or not the artist is living.
-
----
-
-## Interacting explanatory variables
-
-- Including an interaction effect in the model allows for different slopes, i.e. 
-nonparallel lines.
-- This implies that the regression coefficient for an explanatory variable would 
-change as another explanatory variable changes.
-- This can be accomplished by adding an interaction variable: the product of two 
-explanatory variables.
-
----
-
-class: middle
-
-# Side-step: Weights of books
-
----
-
-.question[
-Suppose we want to predict weight of books from their volume and cover type 
-(hardback vs. paperback). Do you think a model with main effects or 
-interaction effects is more appropriate? Explain your reasoning.
-
-**Hint:** Main effects would mean rate at which weight changes as volume 
-increases would be the same for hardback and paperback books and interaction 
-effects would mean the rate at which weight changes as volume 
-increases would be different for hardback and paperback books.
-]
-
----
-
-## Book weight and volume
+## Data: Book weight and volume
 
 The `allbacks` data frame gives measurements on the volume and weight of 15 books, some of which are softback and some of which are hardback.
 
-
-```r
-library(DAAG)
-as_tibble(allbacks)
-```
+.pull-left[
+- Volume - cubic centimetres
+- Area - square centimetres
+- Weight - grams
+]
+.pull-right[
+.small[
 
 ```
 ## # A tibble: 15 x 4
@@ -306,8 +71,14 @@ as_tibble(allbacks)
 ##  8    412     0    250 pb   
 ##  9    953     0    700 pb   
 ## 10    929     0    650 pb   
-## # … with 5 more rows
+## 11   1492     0    975 pb   
+## 12    419     0    350 pb   
+## 13   1010     0    950 pb   
+## 14    595     0    425 pb   
+## 15   1034     0    725 pb
 ```
+]
+]
 
 .footnote[
 .small[
@@ -317,23 +88,97 @@ These books are from the bookshelf of J. H. Maindonald at Australian National Un
 
 ---
 
-## Book weight and volume
+## Book weight vs. volume
 
+.pull-left[
 
 ```r
-ggplot(allbacks, aes(x = volume, y = weight, color = cover)) +
-  geom_point(alpha = 0.7, size = 2)
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(weight ~ volume, data = allbacks) %&gt;%
+  tidy()
 ```
 
-&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-7-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic    p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1 (Intercept)  108.      88.4         1.22 0.245     
+## 2 volume         0.709    0.0975      7.27 0.00000626
+```
+]
+.pull-right[
+&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-4-1.png" width="75%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
 
 ---
 
+## Book weight vs. volume and cover
 
-&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-8-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+.pull-left[
+
+```r
+linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(weight ~ volume + cover, data = allbacks) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic      p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+## 1 (Intercept)  198.      59.2         3.34 0.00584     
+## 2 volume         0.718    0.0615     11.7  0.0000000660
+## 3 coverpb     -184.      40.5        -4.55 0.000672
+```
+]
+.pull-right[
+&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-6-1.png" width="75%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+---
+
+## Interpretation of estimates
 
 
-&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-9-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic      p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+## 1 (Intercept)  198.      59.2         3.34 0.00584     
+## 2 volume         0.718    0.0615     11.7  0.0000000660
+## 3 coverpb     -184.      40.5        -4.55 0.000672
+```
+
+--
+- **Slope - volume:** *All else held constant*, for each additional cubic centimetre books are larger in volume, we would expect the weight to be higher, on average, by 0.718 grams.
+
+--
+- **Slope - cover:** *All else held constant*, paperback books are weigh, on average, by 184 grams less than hardcover books.
+
+--
+- **Intercept:** Hardcover books with 0 volume are expected to weigh 198 grams, on average. (Doesn't make sense in context.)
+
+
+---
+
+## Main vs. interaction effects
+
+.question[
+Suppose we want to predict weight of books from their volume and cover type 
+(hardback vs. paperback). Do you think a model with main effects or 
+interaction effects is more appropriate? Explain your reasoning.
+
+**Hint:** Main effects would mean rate at which weight changes as volume 
+increases would be the same for hardback and paperback books and interaction 
+effects would mean the rate at which weight changes as volume 
+increases would be different for hardback and paperback books.
+]
+
+---
+
+&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/book-main-int-1.png" width="65%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -352,14 +197,14 @@ ggplot(allbacks, aes(x = volume, y = weight, color = cover)) +
 
 ---
 
+.pull-left[
+&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
 .question[
 Visually, which of the two models is preferable under Occam's razor?
 ]
-
-&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-10-1.png" width="55%" style="display: block; margin: auto;" /&gt;
-
-
-&lt;img src="w8-d05-model-multiple-predictors_files/figure-html/unnamed-chunk-11-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
@@ -370,7 +215,7 @@ the regression model.
 
 
 ```r
-glance(m_main)$r.squared
+glance(book_fit_main)$r.squared
 ```
 
 ```
@@ -378,7 +223,7 @@ glance(m_main)$r.squared
 ```
 
 ```r
-glance(m_int)$r.squared
+glance(book_fit_int)$r.squared
 ```
 
 ```
@@ -410,7 +255,7 @@ regression models.
 .pull-left[
 
 ```r
-glance(m_main)$r.squared
+glance(book_fit_main)$r.squared
 ```
 
 ```
@@ -418,7 +263,7 @@ glance(m_main)$r.squared
 ```
 
 ```r
-glance(m_int)$r.squared
+glance(book_fit_int)$r.squared
 ```
 
 ```
@@ -428,7 +273,7 @@ glance(m_int)$r.squared
 .pull-right[
 
 ```r
-glance(m_main)$adj.r.squared
+glance(book_fit_main)$adj.r.squared
 ```
 
 ```
@@ -436,7 +281,7 @@ glance(m_main)$adj.r.squared
 ```
 
 ```r
-glance(m_int)$adj.r.squared
+glance(book_fit_int)$adj.r.squared
 ```
 
 ```
@@ -446,58 +291,30 @@ glance(m_int)$adj.r.squared
 
 --
 
+.pull-left-wide[
 .small[
+- Is R-sq higher for int model?
 
 ```r
-# Is R-sq higher for int model?
-glance(m_int)$r.squared &gt; glance(m_main)$r.squared 
+glance(book_fit_int)$r.squared &gt; glance(m_main)$r.squared 
 ```
 
 ```
 ## [1] TRUE
 ```
 
+- Is R-sq adj. higher for int model?
+
+
 ```r
-# Is R-sq adj. higher for int model?
-glance(m_int)$adj.r.squared &gt; glance(m_main)$adj.r.squared
+glance(book_fit_int)$adj.r.squared &gt; glance(m_main)$adj.r.squared
 ```
 
 ```
 ## [1] FALSE
 ```
 ]
-
----
-
-
-```r
-knitr::knit_exit()
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
