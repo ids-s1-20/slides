@@ -52,8 +52,10 @@ pp <- read_csv(
 - Explanatory variables: Width and height
 
 ```{r model-price-width-height}
-m_wi_hgt <- lm(log_price ~ Width_in + Height_in, data = pp)
-tidy(m_wi_hgt)
+pp_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(log_price ~ Width_in + Height_in, data = pp)
+tidy(pp_fit)
 ```
 
 ---
@@ -61,7 +63,7 @@ tidy(m_wi_hgt)
 ##  Linear model with multiple predictors
 
 ```{r model-price-width-height-tidy, echo=FALSE}
-tidy(m_wi_hgt)
+tidy(pp_fit)
 ```
 
 <br>

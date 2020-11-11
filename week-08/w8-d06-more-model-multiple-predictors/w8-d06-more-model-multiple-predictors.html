@@ -68,8 +68,10 @@ pp &lt;- read_csv(
 
 
 ```r
-m_wi_hgt &lt;- lm(log_price ~ Width_in + Height_in, data = pp)
-tidy(m_wi_hgt)
+pp_fit &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(log_price ~ Width_in + Height_in, data = pp)
+tidy(pp_fit)
 ```
 
 ```
@@ -106,8 +108,8 @@ tidy(m_wi_hgt)
 .panelset[
 .panel[.panel-name[Plot]
 .pull-left-wide[
-<div id="htmlwidget-739065d5398554549f4c" style="width:100%;height:1483.2px;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-739065d5398554549f4c">{"x":{"url":"w8-d06-more-model-multiple-predictors_files/figure-html//widgets/widget_plotly-plot.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-03839427d3b7c2e3fede" style="width:100%;height:1483.2px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-03839427d3b7c2e3fede">{"x":{"url":"w8-d06-more-model-multiple-predictors_files/figure-html//widgets/widget_plotly-plot.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 ]
 ]
 .panel[.panel-name[Code]
