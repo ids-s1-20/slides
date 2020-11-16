@@ -61,11 +61,11 @@ class: middle
 
 
 ```r
-# Fix the random numbers by setting the seed 
+# Fix random numbers by setting the seed 
 # Enables analysis to be reproducible when random numbers are used 
 set.seed(1116)
 
-# Put 3/4 of the data into the training set 
+# Put 80% of the data into the training set 
 email_split &lt;- initial_split(email, prop = 0.80)
 
 # Create data frames for the two sets:
@@ -547,10 +547,10 @@ class: middle
 Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.5**.
 
 
-|                | Predict not spam| Predict spam|
-|:---------------|----------------:|------------:|
-|Actual not spam |              703|            4|
-|Actual spam     |               67|           10|
+|                        | Email is not spam| Email is spam|
+|:-----------------------|-----------------:|-------------:|
+|Email labelled not spam |               703|            67|
+|Email labelled spam     |                 4|            10|
 ]
 .panel[.panel-name[Code]
 
@@ -558,12 +558,12 @@ Suppose we decide to label an email as spam if the model predicts the probabilit
 cutoff_prob &lt;- 0.5
 email_pred %&gt;%
   mutate(
-    spam      = if_else(spam == 1, "Actual spam", "Actual not spam"),
-    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Predict spam", "Predict not spam")
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Email labelled spam", "Email labelled not spam")
     ) %&gt;%
-  count(spam, spam_pred) %&gt;%
-  pivot_wider(names_from = spam_pred, values_from = n) %&gt;%
-  kable(col.names = c("", "Predict not spam", "Predict spam"))
+  count(spam_pred, spam) %&gt;%
+  pivot_wider(names_from = spam, values_from = n) %&gt;%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
 ```
 ]
 ]
@@ -578,10 +578,10 @@ email_pred %&gt;%
 Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.25**.
 
 
-|                | Predict not spam| Predict spam|
-|:---------------|----------------:|------------:|
-|Actual not spam |              659|           48|
-|Actual spam     |               40|           37|
+|                        | Email is not spam| Email is spam|
+|:-----------------------|-----------------:|-------------:|
+|Email labelled not spam |               659|            40|
+|Email labelled spam     |                48|            37|
 ]
 .panel[.panel-name[Code]
 
@@ -589,12 +589,12 @@ Suppose we decide to label an email as spam if the model predicts the probabilit
 cutoff_prob &lt;- 0.25
 email_pred %&gt;%
   mutate(
-    spam      = if_else(spam == 1, "Actual spam", "Actual not spam"),
-    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Predict spam", "Predict not spam")
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Email labelled spam", "Email labelled not spam")
     ) %&gt;%
-  count(spam, spam_pred) %&gt;%
-  pivot_wider(names_from = spam_pred, values_from = n) %&gt;%
-  kable(col.names = c("", "Predict not spam", "Predict spam"))
+  count(spam_pred, spam) %&gt;%
+  pivot_wider(names_from = spam, values_from = n) %&gt;%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
 ```
 ]
 ]
@@ -609,10 +609,10 @@ email_pred %&gt;%
 Suppose we decide to label an email as spam if the model predicts the probability of spam to be **more than 0.75**.
 
 
-|                | Predict not spam| Predict spam|
-|:---------------|----------------:|------------:|
-|Actual not spam |              706|            1|
-|Actual spam     |               72|            5|
+|                        | Email is not spam| Email is spam|
+|:-----------------------|-----------------:|-------------:|
+|Email labelled not spam |               706|            72|
+|Email labelled spam     |                 1|             5|
 ]
 .panel[.panel-name[Code]
 
@@ -620,12 +620,12 @@ Suppose we decide to label an email as spam if the model predicts the probabilit
 cutoff_prob &lt;- 0.75
 email_pred %&gt;%
   mutate(
-    spam      = if_else(spam == 1, "Actual spam", "Actual not spam"),
-    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Predict spam", "Predict not spam")
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 &gt; cutoff_prob, "Email labelled spam", "Email labelled not spam")
     ) %&gt;%
-  count(spam, spam_pred) %&gt;%
-  pivot_wider(names_from = spam_pred, values_from = n) %&gt;%
-  kable(col.names = c("", "Predict not spam", "Predict spam"))
+  count(spam_pred, spam) %&gt;%
+  pivot_wider(names_from = spam, values_from = n) %&gt;%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
 ```
 ]
 ]

@@ -54,11 +54,11 @@ class: middle
 ## Same training and testing sets as before
 
 ```{r}
-# Fix the random numbers by setting the seed 
+# Fix random numbers by setting the seed 
 # Enables analysis to be reproducible when random numbers are used 
 set.seed(1116)
 
-# Put 3/4 of the data into the training set 
+# Put 80% of the data into the training set 
 email_split <- initial_split(email, prop = 0.80)
 
 # Create data frames for the two sets:
@@ -340,12 +340,12 @@ Suppose we decide to label an email as spam if the model predicts the probabilit
 cutoff_prob <- 0.5
 email_pred %>%
   mutate(
-    spam      = if_else(spam == 1, "Actual spam", "Actual not spam"),
-    spam_pred = if_else(.pred_1 > cutoff_prob, "Predict spam", "Predict not spam")
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 > cutoff_prob, "Email labelled spam", "Email labelled not spam")
     ) %>%
-  count(spam, spam_pred) %>%
-  pivot_wider(names_from = spam_pred, values_from = n) %>%
-  kable(col.names = c("", "Predict not spam", "Predict spam"))
+  count(spam_pred, spam) %>%
+  pivot_wider(names_from = spam, values_from = n) %>%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
 ```
 ]
 ]
@@ -367,12 +367,12 @@ Suppose we decide to label an email as spam if the model predicts the probabilit
 cutoff_prob <- 0.25
 email_pred %>%
   mutate(
-    spam      = if_else(spam == 1, "Actual spam", "Actual not spam"),
-    spam_pred = if_else(.pred_1 > cutoff_prob, "Predict spam", "Predict not spam")
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 > cutoff_prob, "Email labelled spam", "Email labelled not spam")
     ) %>%
-  count(spam, spam_pred) %>%
-  pivot_wider(names_from = spam_pred, values_from = n) %>%
-  kable(col.names = c("", "Predict not spam", "Predict spam"))
+  count(spam_pred, spam) %>%
+  pivot_wider(names_from = spam, values_from = n) %>%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
 ```
 ]
 ]
@@ -394,12 +394,12 @@ Suppose we decide to label an email as spam if the model predicts the probabilit
 cutoff_prob <- 0.75
 email_pred %>%
   mutate(
-    spam      = if_else(spam == 1, "Actual spam", "Actual not spam"),
-    spam_pred = if_else(.pred_1 > cutoff_prob, "Predict spam", "Predict not spam")
+    spam      = if_else(spam == 1, "Email is spam", "Email is not spam"),
+    spam_pred = if_else(.pred_1 > cutoff_prob, "Email labelled spam", "Email labelled not spam")
     ) %>%
-  count(spam, spam_pred) %>%
-  pivot_wider(names_from = spam_pred, values_from = n) %>%
-  kable(col.names = c("", "Predict not spam", "Predict spam"))
+  count(spam_pred, spam) %>%
+  pivot_wider(names_from = spam, values_from = n) %>%
+  kable(col.names = c("", "Email is not spam", "Email is spam"))
 ```
 ]
 ]
