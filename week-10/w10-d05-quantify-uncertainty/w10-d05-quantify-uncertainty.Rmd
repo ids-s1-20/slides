@@ -616,19 +616,25 @@ int_pctl(elmhurst_models, coef_info)
 ## Code
 
 ```{r eval=FALSE}
+# set a seed
 set.seed(1234)
 
+# take 1000 bootstrap samples
 elmhurst_boot <- bootstraps(elmhurst, times = 1000)
 
+# for each sample
+# fit a model and save output in model column
+# tidy model output and save in coef_info column 
 elmhurst_models <- elmhurst_boot %>%
   mutate(
     model = map(splits, ~ lm(gift_aid ~ family_income, data = .)),
     coef_info = map(model, tidy)
   )
 
+# unnest coef_info (for intercept and slope)
 elmhurst_coefs <- elmhurst_models %>%
   unnest(coef_info)
 
+# calculate 95% (default) percentile interval
 int_pctl(elmhurst_models, coef_info)
 ```
-
