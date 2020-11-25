@@ -586,14 +586,6 @@ int_pctl(elmhurst_models, coef_info)
 
 ---
 
-## Recap
-
-- Sample statistic $\ne$ population parameter, but if the sample is good, it can be a good estimate
-- We report the estimate with a confidence interval, and the width of this interval depends on the variability of sample statistics from different samples from the population
-- Since we can't continue sampling from the population, we bootstrap from the one sample we have to estimate sampling variability
-
----
-
 ## Code
 
 ```{r eval=FALSE}
