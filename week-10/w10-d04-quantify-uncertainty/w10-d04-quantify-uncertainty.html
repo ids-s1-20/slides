@@ -109,27 +109,11 @@ For each additional $1,000 of family income, we would expect students to receive
 
 ---
 
-## Uncertainty in estimates
+class: middle
 
-.panelset[
-.panel[.panel-name[Plot]
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;" /&gt;
-]
-.panel[.panel-name[Code]
-
-```r
-ggplot(elmhurst, aes(x = family_income, y = gift_aid)) +
-  geom_point(color = "#8E2C90", size = 2) +
-  geom_smooth(method = "lm", color = "#8E2C90") +
-  scale_x_continuous(labels = label_dollar(suffix = "K")) + 
-  scale_y_continuous(labels = label_dollar(suffix = "K")) +
-  labs(
-    x = "Family income",
-    y = "Gift aid",
-    title = "Gift aid and family income",
-    subtitle = "Random sample 50 students at Elmhurst College"
-  )
-```
+.hand[
+.light-blue[
+exactly $43.10 for all students at this school?!
 ]
 ]
 
@@ -141,8 +125,9 @@ class: middle
 
 ---
 
-- Statistical inference is the process of using sample data to make conclusions about the underlying population the sample came from.
-- Similar to tasting a spoonful of soup while cooking to make an inference about the entire pot.
+## Statistical inference 
+
+... is the process of using sample data to make conclusions about the underlying population the sample came from
 
 &lt;img src="img/photo-1571942676516-bcab84649e44.png" width="60%" style="display: block; margin: auto;" /&gt;
 
@@ -179,8 +164,8 @@ If you want to estimate a population parameter, do you prefer to report a range 
 
 --
 
-- If we report a point estimate, we probably won’t hit the exact population parameter.
-- If we report a range of plausible values we have a good shot at capturing the parameter.
+- If we report a point estimate, we probably won’t hit the exact population parameter
+- If we report a range of plausible values we have a good shot at capturing the parameter
 
 ---
 
@@ -280,7 +265,7 @@ class: middle
 
 ## Observed sample
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -288,15 +273,21 @@ class: middle
 
 Generated assuming there are more students like the ones in the observed sample...
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-12-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Bootstrapping scheme
 
 1. Take a bootstrap sample - a random sample taken **with replacement** from the original sample, of the same size as the original sample
+
+--
 2. Calculate the bootstrap statistic - a statistic such as mean, median, proportion, slope, etc. computed on the bootstrap samples
+
+--
 3. Repeat steps (1) and (2) many times to create a bootstrap distribution - a distribution of bootstrap statistics
+
+--
 4. Calculate the bounds of the XX% confidence interval as the middle XX% of the bootstrap distribution
 
 ---
@@ -310,7 +301,7 @@ elmhurtst_boot_1 &lt;- elmhurst %&gt;%
 ```
 
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-15-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-14-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -323,7 +314,7 @@ elmhurtst_boot_2 &lt;- elmhurst %&gt;%
 ```
 
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -336,7 +327,7 @@ elmhurtst_boot_3 &lt;- elmhurst %&gt;%
 ```
 
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-19-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-18-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -349,13 +340,13 @@ elmhurtst_boot_4 &lt;- elmhurst %&gt;%
 ```
 
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-21-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-20-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Bootstrap samples 1 - 4
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-21-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -371,19 +362,19 @@ we could keep going...
 
 ## Many many samples...
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-23-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-22-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Slopes of bootstrap samples
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-24-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-23-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## 95% confidence interval
 
-&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-25-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="w10-d04-quantify-uncertainty_files/figure-html/unnamed-chunk-24-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 

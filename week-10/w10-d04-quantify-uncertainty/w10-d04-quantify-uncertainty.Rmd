@@ -123,27 +123,11 @@ For each additional $1,000 of family income, we would expect students to receive
 
 ---
 
-## Uncertainty in estimates
+class: middle
 
-.panelset[
-.panel[.panel-name[Plot]
-```{r ref.label="sample-plot", warning=FALSE, echo=FALSE}
-```
-]
-.panel[.panel-name[Code]
-```{r sample-plot, fig.show="hide", warning=FALSE}
-ggplot(elmhurst, aes(x = family_income, y = gift_aid)) +
-  geom_point(color = "#8E2C90", size = 2) +
-  geom_smooth(method = "lm", color = "#8E2C90") +
-  scale_x_continuous(labels = label_dollar(suffix = "K")) + 
-  scale_y_continuous(labels = label_dollar(suffix = "K")) +
-  labs(
-    x = "Family income",
-    y = "Gift aid",
-    title = "Gift aid and family income",
-    subtitle = "Random sample 50 students at Elmhurst College"
-  )
-```
+.hand[
+.light-blue[
+exactly $43.10 for all students at this school?!
 ]
 ]
 
@@ -155,8 +139,9 @@ class: middle
 
 ---
 
-- Statistical inference is the process of using sample data to make conclusions about the underlying population the sample came from.
-- Similar to tasting a spoonful of soup while cooking to make an inference about the entire pot.
+## Statistical inference 
+
+... is the process of using sample data to make conclusions about the underlying population the sample came from
 
 ```{r echo=FALSE, out.width="60%"}
 knitr::include_graphics("img/photo-1571942676516-bcab84649e44.png")
@@ -199,8 +184,8 @@ If you want to estimate a population parameter, do you prefer to report a range 
 
 --
 
-- If we report a point estimate, we probably won’t hit the exact population parameter.
-- If we report a range of plausible values we have a good shot at capturing the parameter.
+- If we report a point estimate, we probably won’t hit the exact population parameter
+- If we report a range of plausible values we have a good shot at capturing the parameter
 
 ---
 
@@ -306,6 +291,7 @@ elmhurst_slope_obs <- elmhurst_fit %>%
 ```{r echo=FALSE}
 ggplot(elmhurst, aes(x = family_income, y = gift_aid)) +
   geom_point(color = "#8E2C90", size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") +
   scale_x_continuous(labels = label_dollar(suffix = "K"), limits = c(0, 275)) + 
   scale_y_continuous(labels = label_dollar(suffix = "K"), limits = c(0, 42)) +
   geom_text(aes(x = 200, y = 40), label = paste("slope =", elmhurst_slope_obs), size = 6, hjust = 0)  +
@@ -347,8 +333,14 @@ elmhurst_boot %>%
 ## Bootstrapping scheme
 
 1. Take a bootstrap sample - a random sample taken **with replacement** from the original sample, of the same size as the original sample
+
+--
 2. Calculate the bootstrap statistic - a statistic such as mean, median, proportion, slope, etc. computed on the bootstrap samples
+
+--
 3. Repeat steps (1) and (2) many times to create a bootstrap distribution - a distribution of bootstrap statistics
+
+--
 4. Calculate the bounds of the XX% confidence interval as the middle XX% of the bootstrap distribution
 
 ---
@@ -568,10 +560,45 @@ elmhurst_coefs %>%
   ggplot(aes(estimate)) +
   geom_histogram(binwidth = 0.0025, alpha = 0.7, fill = "gray") +
   labs(title = "Distribution of slopes of bootstrap samples") +
-  geom_vline(xintercept = intervals %>% pull(.lower)) +
-  geom_vline(xintercept = intervals %>% pull(.upper)) +
-  geom_text(aes(x = -0.075, y = 25), label = as.character(intervals %>% pull(.lower) %>% round(4)), size = 6, hjust = 1)  +
-  geom_text(aes(x = -0.027, y = 25), label = as.character(intervals %>% pull(.upper) %>% round(4)), size = 6, hjust = -1) 
+  geom_segment(
+    aes(
+      x = intervals %>% pull(.lower),
+      xend = intervals %>% pull(.lower),
+      y = 0,
+      yend = 25
+    ),
+    linetype = "dashed"
+  ) +
+  geom_text(
+    aes(x = intervals %>% pull(.lower), y = 30),
+    label = as.character(intervals %>% pull(.lower) %>% round(4)), size = 6
+  ) +
+  geom_segment(
+    aes(
+      x = intervals %>% pull(.upper),
+      xend = intervals %>% pull(.upper),
+      y = 0,
+      yend = 25
+    ),
+    linetype = "dashed"
+  ) +
+  geom_text(
+    aes(x = intervals %>% pull(.upper), y = 30),
+    label = as.character(intervals %>% pull(.upper) %>% round(4)), size = 6
+  ) +
+  geom_segment(
+    aes(
+      x = elmhurst_slope_obs,
+      xend = elmhurst_slope_obs,
+      y = 0,
+      yend = 25
+    ),
+    color = "#8E2C90"
+  ) +
+  geom_text(
+    aes(x = elmhurst_slope_obs, y = 30),
+    label = as.character(elmhurst_slope_obs), size = 6, color = "#8E2C90"
+  )
 ```
 
 ---
