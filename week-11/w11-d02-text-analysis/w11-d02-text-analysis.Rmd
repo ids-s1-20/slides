@@ -20,13 +20,7 @@ output:
 
 ```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(tidymodels)
-library(knitr)
-library(openintro)
-library(scales)
-set.seed(1234)
-
-elmhurst_boot <- bootstraps(elmhurst, times = 1000)
+library(tidytext)
 ```
 
 class: middle

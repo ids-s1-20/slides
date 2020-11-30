@@ -18,17 +18,6 @@ output:
 ```{r child = "../../setup.Rmd"}
 ```
 
-```{r packages, echo = FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(tidymodels)
-library(knitr)
-library(openintro)
-library(scales)
-set.seed(1234)
-
-elmhurst_boot <- bootstraps(elmhurst, times = 1000)
-```
-
 ## What is a document about?
 
 - Term frequency
